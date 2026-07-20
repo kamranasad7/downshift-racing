@@ -69,6 +69,7 @@ One **rewarded-ad continue per run**: respawn stationary at the crash point with
 - Chunk-based procedural generation using Unity **SpriteShape** splines
 - Seeded noise shaped by a difficulty curve: with distance, average grade steepens, sustained steeps lengthen (brake-endurance tests), crests/drops sharpen, cooling gets sparser
 - **Stuck-proofing (hard constraint):** with no gas button, the generator must guarantee forward progress — net elevation always decreases, and any local rise is small enough that a car entering at walking speed still clears it. No dips a stationary car cannot roll out of.
+- **Creep force (safety net):** the car always receives a tiny constant forward force — negligible next to gravity and imperceptible to the player — so that even in a degenerate flat/dip spot it slowly creeps forward and can never be stuck in place. Belt and suspenders with the generator constraint above; magnitude lives in `VehicleStats`.
 - Chunks stream ahead of the player and are pooled/recycled behind
 
 ### Environments (coin-unlocked stages)
