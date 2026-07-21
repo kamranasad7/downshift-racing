@@ -18,3 +18,6 @@ Task 8: complete (commits 50f9e2b..ca9ad63 + fix 65aff8c, spec pass, quality app
   Ratified: playmode thresholds freeSpeed>1, brakeTemp>0.1, roll>+2 (measured physics: gear-0 engine braking caps free roll ~1.45 m/s)
   For balancing (morning): starter car gear-0 engine braking may be too strong (engineBrakeTorque 260, ratio 3.2, final 3.7)
 Task 9: complete (commits c06b7a0..8c62e16, spec pass, quality approved; asmdef SpriteShape refs adjudicated necessary+minimal)
+Task 10: complete (commits e32764c..2f40e3a, spec pass, quality approved; activeInputHandler 1->2 fix adjudicated necessary)
+  Forward: Task 13 MUST filter trigger-vs-trigger in RoofCrashDetector (coin false-crash risk); input-system-vs-legacy decision for morning; Blown event no unsubscribe (benign)
+  Morning checklist: R-key restart + scene reload manual verify
