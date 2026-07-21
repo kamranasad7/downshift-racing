@@ -13,6 +13,7 @@ namespace Downshift
         public TMP_Text gearText;
         public TMP_Text speedText;
         public TMP_Text distanceText;
+        public TMP_Text coinText;
         public GameObject resultsPanel;
         public TMP_Text resultsText;
         public HoldButton brakeButton;
@@ -42,6 +43,7 @@ namespace Downshift
             gearText.text = $"G{vehicle.CurrentGear + 1}";
             speedText.text = $"{Mathf.FloorToInt(vehicle.SpeedMs * 3.6f)} km/h";
             distanceText.text = $"{Mathf.FloorToInt(runManager.DistanceM)} m";
+            coinText.text = $"{Wallet.Coins} c";
         }
     }
 }

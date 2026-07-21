@@ -8,6 +8,7 @@ namespace Downshift
 
         void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.isTrigger) return;
             if (other.GetComponentInParent<VehicleController>() != null) return;
             if (runManager != null) runManager.NotifyCrash();
         }

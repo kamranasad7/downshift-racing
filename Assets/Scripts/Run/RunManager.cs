@@ -18,6 +18,7 @@ namespace Downshift
 
         void Start()
         {
+            Wallet.Coins = 0;
             vehicle.Blown += OnBlown;
         }
 

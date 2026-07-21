@@ -34,6 +34,7 @@ namespace Downshift.EditorTools
             hud.gearText = Label(canvasGo, "Gear", new Vector2(820, 440), 48);
             hud.speedText = Label(canvasGo, "Speed", new Vector2(0, 460), 40);
             hud.distanceText = Label(canvasGo, "Distance", new Vector2(0, 400), 32);
+            hud.coinText = Label(canvasGo, "Coins", new Vector2(820, 380), 36);
 
             var brake = Button(canvasGo, "BrakeBtn", new Vector2(-700, -380), new Vector2(360, 220), "BRAKE");
             hud.brakeButton = brake.gameObject.AddComponent<HoldButton>();

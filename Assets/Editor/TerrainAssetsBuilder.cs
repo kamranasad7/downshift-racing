@@ -22,6 +22,31 @@ namespace Downshift.EditorTools
             AssetDatabase.SaveAssets();
         }
 
+        [MenuItem("Downshift/Build/Pickup Prefabs")]
+        public static void BuildPickupPrefabs()
+        {
+            BuildOne("Coin", true, new Color(1f, 0.85f, 0.1f), 0.35f, PickupKind.Coin);
+            BuildOne("Coolant", true, new Color(0.2f, 0.6f, 1f), 0.45f, PickupKind.Coolant);
+            BuildOne("Station", false, new Color(0.2f, 0.9f, 0.4f), 1.5f, PickupKind.Station);
+        }
+
+        static void BuildOne(string name, bool circle, Color color, float scale, PickupKind kind)
+        {
+            string path = $"Assets/Prefabs/{name}.prefab";
+            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
+            var go = new GameObject(name);
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = SpriteFactory.Ensure(circle ? "circle" : "square", circle);
+            sr.color = color;
+            go.transform.localScale = Vector3.one * scale;
+            var col = go.AddComponent<CircleCollider2D>();
+            col.isTrigger = true;
+            col.radius = 0.6f;
+            go.AddComponent<Pickup>().kind = kind;
+            PrefabUtility.SaveAsPrefabAsset(go, path);
+            Object.DestroyImmediate(go);
+        }
+
         [MenuItem("Downshift/Build/Run Scene")]
         public static void BuildRunScene()
         {
@@ -38,6 +63,11 @@ namespace Downshift.EditorTools
             streamer.config = config;
             streamer.target = car.transform;
             streamer.shapeProfile = AssetDatabase.LoadAssetAtPath<SpriteShape>("Assets/Art/TerrainShapeProfile.asset");
+
+            BuildPickupPrefabs();
+            streamer.coinPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Coin.prefab");
+            streamer.coolantPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Coolant.prefab");
+            streamer.stationPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Station.prefab");
 
             var input = new GameObject("Input");
             input.AddComponent<KeyboardInput>().vehicle = car.GetComponent<VehicleController>();

@@ -10,6 +10,9 @@ namespace Downshift
         public int activeChunks = 3;
         public SpriteShape shapeProfile;
         public float bottomDepth = 30f;
+        public GameObject coinPrefab;
+        public GameObject coolantPrefab;
+        public GameObject stationPrefab;
 
         GameObject[] _chunks;
         int[] _chunkIndices;
@@ -78,6 +81,19 @@ namespace Downshift
             spline.InsertPointAt(heights.Length + 1, new Vector3(startX, minY - bottomDepth, 0f));
 
             go.GetComponent<EdgeCollider2D>().points = colPts;
+
+            var old = go.transform.Find("Pickups");
+            if (old != null) Destroy(old.gameObject);
+            var parent = new GameObject("Pickups").transform;
+            parent.SetParent(go.transform, false);
+            foreach (var (x, kind) in PickupPlacer.PlacementsForChunk(chunkIndex, config))
+            {
+                var prefab = kind == PickupKind.Coin ? coinPrefab : kind == PickupKind.Coolant ? coolantPrefab : stationPrefab;
+                if (prefab == null) continue;
+                float y = TerrainProfile.Height(x, config) + (kind == PickupKind.Station ? 2.5f : 1.2f);
+                var inst = Instantiate(prefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
+                inst.SetActive(true);
+            }
         }
     }
 }

@@ -103,5 +103,20 @@ namespace Downshift
         {
             foreach (var j in _joints) j.useMotor = false;
         }
+
+        public void CoolPartial(float engineAmount, float brakeAmount)
+        {
+            _engineTemp = Mathf.Max(0f, _engineTemp - engineAmount);
+            var b = _brakes;
+            b.Temp = Mathf.Max(0f, b.Temp - brakeAmount);
+            if (b.Faded && b.Temp <= stats.brakeReengageTemp) b.Faded = false;
+            _brakes = b;
+        }
+
+        public void CoolFull()
+        {
+            _engineTemp = 0f;
+            _brakes = new BrakeState();
+        }
     }
 }
