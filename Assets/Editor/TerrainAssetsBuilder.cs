@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -45,6 +46,17 @@ namespace Downshift.EditorTools
             var run = runGo.AddComponent<RunManager>();
             run.vehicle = car.GetComponent<VehicleController>();
             car.GetComponentInChildren<RoofCrashDetector>().runManager = run;
+
+            var camGo = new GameObject("CM Follow");
+            var cine = camGo.AddComponent<CinemachineCamera>();
+            cine.Follow = car.transform;
+            var composer = camGo.AddComponent<CinemachinePositionComposer>();
+            var lens = cine.Lens;
+            lens.OrthographicSize = 6f;
+            cine.Lens = lens;
+            var speedCam = camGo.AddComponent<SpeedCamera>();
+            speedCam.vehicle = car.GetComponent<VehicleController>();
+            Camera.main.gameObject.AddComponent<Unity.Cinemachine.CinemachineBrain>();
 
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
                 AssetDatabase.CreateFolder("Assets", "Scenes");
