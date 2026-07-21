@@ -18,7 +18,7 @@
 - Code comments: none unless the code is genuinely non-obvious (user's global rule).
 - Commit messages: single line, ~10–15 words, no AI attribution, no body (user's global rule).
 - Tests run headless via `.\run-tests.ps1` from repo root; all EditMode tests must pass before every commit.
-- Repo root `D:\Projects\Android\Downshift` IS the Unity project root (`Assets/` next to `docs/`).
+- Repo root `D:\Projects\Unity\DownshiftRacing` IS the Unity project root (`Assets/` next to `docs/`).
 
 ## Prerequisite (user, one-time)
 
@@ -42,15 +42,15 @@ Install **Unity Hub**, then in Hub → Installs → Install Editor → **Unity 6
 
 - [ ] **Step 1: USER — create project via Unity Hub**
 
-In Unity Hub → Projects → New project → editor version 6000.3.x → template **Universal 2D** → project name `DownshiftTmp` → location `D:\Projects\Android` → Create. Wait for the editor to open, then close Unity completely.
+In Unity Hub → Projects → New project → editor version 6000.3.x → template **Universal 2D** → project name `DownshiftTmp` → location `D:\Projects\Unity` → Create. Wait for the editor to open, then close Unity completely.
 
 - [ ] **Step 2: Move generated project into the repo root**
 
 ```powershell
-Move-Item "D:\Projects\Android\DownshiftTmp\Assets" "D:\Projects\Android\Downshift\"
-Move-Item "D:\Projects\Android\DownshiftTmp\Packages" "D:\Projects\Android\Downshift\"
-Move-Item "D:\Projects\Android\DownshiftTmp\ProjectSettings" "D:\Projects\Android\Downshift\"
-Remove-Item -Recurse -Force "D:\Projects\Android\DownshiftTmp"
+Move-Item "D:\Projects\Unity\DownshiftTmp\Assets" "D:\Projects\Unity\DownshiftRacing\"
+Move-Item "D:\Projects\Unity\DownshiftTmp\Packages" "D:\Projects\Unity\DownshiftRacing\"
+Move-Item "D:\Projects\Unity\DownshiftTmp\ProjectSettings" "D:\Projects\Unity\DownshiftRacing\"
+Remove-Item -Recurse -Force "D:\Projects\Unity\DownshiftTmp"
 ```
 
 - [ ] **Step 3: Write `.gitignore`**
@@ -138,7 +138,7 @@ Note: Unity cannot run tests while the editor has the project open. Close the ed
 
 - [ ] **Step 6: Install packages and set player settings**
 
-Open the project in Unity once (`Unity Hub → Open → D:\Projects\Android\Downshift`). Then:
+Open the project in Unity once (`Unity Hub → Open → D:\Projects\Unity\DownshiftRacing`). Then:
 - Window → Package Manager → Unity Registry → install **2D SpriteShape** and **Cinemachine** (3.x). (Test Framework, uGUI, TextMeshPro ship by default.)
 - Edit → Project Settings → Player: Company Name `AsadKamran`, Product Name `Downshift`; Resolution and Presentation → Default Orientation → **Landscape Left**, and under Allowed Orientations enable only the two landscape options.
 - File → Save Project. Close Unity.
