@@ -40,9 +40,9 @@ namespace Downshift
         void UpdateChunks(bool force)
         {
             int first = Mathf.Max(0, ChunkIndexAt(target.position.x, config) - 1);
-            for (int slot = 0; slot < activeChunks; slot++)
+            for (int wanted = first; wanted < first + activeChunks; wanted++)
             {
-                int wanted = first + slot;
+                int slot = wanted % activeChunks;
                 if (_chunkIndices[slot] != wanted || force)
                 {
                     BuildChunk(_chunks[slot], wanted);
@@ -90,7 +90,7 @@ namespace Downshift
             {
                 var prefab = kind == PickupKind.Coin ? coinPrefab : kind == PickupKind.Coolant ? coolantPrefab : stationPrefab;
                 if (prefab == null) continue;
-                float y = TerrainProfile.Height(x, config) + (kind == PickupKind.Station ? 2.5f : 1.2f);
+                float y = TerrainProfile.Height(x, config) + (kind == PickupKind.Station ? 1.4f : 1.2f);
                 var inst = Instantiate(prefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
                 inst.SetActive(true);
             }

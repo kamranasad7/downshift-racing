@@ -93,6 +93,14 @@ namespace Downshift.EditorTools
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
                 AssetDatabase.CreateFolder("Assets", "Scenes");
             EditorSceneManager.SaveScene(scene, "Assets/Scenes/Run.unity");
+
+            var scenePath = "Assets/Scenes/Run.unity";
+            var scenes = new System.Collections.Generic.List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
+            if (!scenes.Exists(s => s.path == scenePath))
+            {
+                scenes.Add(new EditorBuildSettingsScene(scenePath, true));
+                EditorBuildSettings.scenes = scenes.ToArray();
+            }
         }
     }
 }

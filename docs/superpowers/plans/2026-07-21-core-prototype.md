@@ -84,9 +84,11 @@ $unity = Get-ChildItem $editorRoot -Directory |
 if (-not $unity) { throw "No Unity 6000.3.x found under $editorRoot" }
 $results = Join-Path $proj "TestResults\editmode.xml"
 New-Item -ItemType Directory -Force (Split-Path $results) | Out-Null
+Remove-Item $results -ErrorAction SilentlyContinue
 & "$($unity.FullName)\Editor\Unity.exe" -batchmode -projectPath $proj `
     -runTests -testPlatform EditMode -testResults $results `
     -logFile (Join-Path $proj "TestResults\editmode.log") | Out-Null
+if (-not (Test-Path $results)) { throw "No test results produced - Unity run failed; see log" }
 [xml]$xml = Get-Content $results
 $run = $xml."test-run"
 Write-Host ("Tests: {0}  Passed: {1}  Failed: {2}" -f $run.total, $run.passed, $run.failed)
@@ -1312,9 +1314,9 @@ namespace Downshift
         void UpdateChunks(bool force)
         {
             int first = Mathf.Max(0, ChunkIndexAt(target.position.x, config) - 1);
-            for (int slot = 0; slot < activeChunks; slot++)
+            for (int wanted = first; wanted < first + activeChunks; wanted++)
             {
-                int wanted = first + slot;
+                int slot = wanted % activeChunks;
                 if (_chunkIndices[slot] != wanted || force)
                 {
                     BuildChunk(_chunks[slot], wanted);
@@ -2213,7 +2215,7 @@ foreach (var (x, kind) in PickupPlacer.PlacementsForChunk(chunkIndex, config))
 {
     var prefab = kind == PickupKind.Coin ? coinPrefab : kind == PickupKind.Coolant ? coolantPrefab : stationPrefab;
     if (prefab == null) continue;
-    float y = TerrainProfile.Height(x, config) + (kind == PickupKind.Station ? 2.5f : 1.2f);
+    float y = TerrainProfile.Height(x, config) + (kind == PickupKind.Station ? 1.4f : 1.2f);
     var inst = Instantiate(prefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
     inst.SetActive(true);
 }
@@ -2261,6 +2263,17 @@ BuildPickupPrefabs();
 streamer.coinPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Coin.prefab");
 streamer.coolantPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Coolant.prefab");
 streamer.stationPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Station.prefab");
+```
+
+After `EditorSceneManager.SaveScene(scene, "Assets/Scenes/Run.unity");` at the end of `BuildRunScene`, register the scene in the build settings so `RunManager`'s `SceneManager.LoadScene(buildIndex)` restart can find it:
+```csharp
+var scenePath = "Assets/Scenes/Run.unity";
+var scenes = new System.Collections.Generic.List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
+if (!scenes.Exists(s => s.path == scenePath))
+{
+    scenes.Add(new EditorBuildSettingsScene(scenePath, true));
+    EditorBuildSettings.scenes = scenes.ToArray();
+}
 ```
 
 In `HudBuilder.Build`, add a coin label after `hud.distanceText`:

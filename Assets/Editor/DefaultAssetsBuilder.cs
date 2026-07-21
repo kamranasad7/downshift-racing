@@ -15,6 +15,12 @@ namespace Downshift.EditorTools
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<VehicleStats>(), "Assets/Data/Hatchback.asset");
             if (AssetDatabase.LoadAssetAtPath<TerrainConfig>("Assets/Data/Terrain.asset") == null)
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<TerrainConfig>(), "Assets/Data/Terrain.asset");
+
+            var hatchback = AssetDatabase.LoadAssetAtPath<VehicleStats>("Assets/Data/Hatchback.asset");
+            EditorUtility.SetDirty(hatchback);
+            var terrain = AssetDatabase.LoadAssetAtPath<TerrainConfig>("Assets/Data/Terrain.asset");
+            EditorUtility.SetDirty(terrain);
+
             AssetDatabase.SaveAssets();
         }
     }

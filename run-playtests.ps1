@@ -7,9 +7,11 @@ $unity = Get-ChildItem $editorRoot -Directory |
 if (-not $unity) { throw "No Unity 6000.3.x found under $editorRoot" }
 $results = Join-Path $proj "TestResults\playmode.xml"
 New-Item -ItemType Directory -Force (Split-Path $results) | Out-Null
+Remove-Item $results -ErrorAction SilentlyContinue
 & "$($unity.FullName)\Editor\Unity.exe" -batchmode -projectPath $proj `
     -runTests -testPlatform PlayMode -testResults $results `
     -logFile (Join-Path $proj "TestResults\playmode.log") | Out-Null
+if (-not (Test-Path $results)) { throw "No test results produced - Unity run failed; see log" }
 [xml]$xml = Get-Content $results
 $run = $xml."test-run"
 Write-Host ("Tests: {0}  Passed: {1}  Failed: {2}" -f $run.total, $run.passed, $run.failed)

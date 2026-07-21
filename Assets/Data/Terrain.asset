@@ -23,3 +23,8 @@ MonoBehaviour:
   pointSpacing: 2
   pointsPerChunk: 64
   maxLocalRise: 0.25
+  coinEveryMeters: 25
+  coolantEveryMeters: 180
+  stationEveryMeters: 900
+  pickupSparsityRampMeters: 4000
+  pickupSparsityMaxMultiplier: 2.5

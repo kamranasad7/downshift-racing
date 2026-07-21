@@ -54,8 +54,11 @@ namespace Downshift
 
         bool IsAirborne()
         {
+            var filter = new ContactFilter2D();
+            filter.SetLayerMask(Physics2D.AllLayers);
+            filter.useTriggers = false;
             foreach (var c in _wheelCols)
-                if (c.IsTouchingLayers(Physics2D.AllLayers)) return false;
+                if (c.IsTouching(filter)) return false;
             return true;
         }
 
