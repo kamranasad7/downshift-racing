@@ -1,0 +1,9 @@
+{
+    "name": "Downshift.Tests.EditMode",
+    "rootNamespace": "Downshift.Tests",
+    "references": ["Downshift.Runtime", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+    "includePlatforms": ["Editor"],
+    "precompiledReferences": ["nunit.framework.dll"],
+    "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+    "overrideReferences": true
+}

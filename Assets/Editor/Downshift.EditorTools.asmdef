@@ -1,0 +1,6 @@
+{
+    "name": "Downshift.EditorTools",
+    "rootNamespace": "Downshift.EditorTools",
+    "references": ["Downshift.Runtime"],
+    "includePlatforms": ["Editor"]
+}

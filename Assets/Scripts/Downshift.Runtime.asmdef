@@ -1,0 +1,6 @@
+{
+    "name": "Downshift.Runtime",
+    "rootNamespace": "Downshift",
+    "references": ["Unity.Cinemachine", "Unity.2D.SpriteShape.Runtime", "Unity.TextMeshPro"],
+    "noEngineReferences": false
+}

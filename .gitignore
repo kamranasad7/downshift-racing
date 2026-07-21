@@ -1,0 +1,14 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+TestResults/
+*.csproj
+*.sln
+*.user
+.vs/
+.utmp/
+crashlytics-build.properties
