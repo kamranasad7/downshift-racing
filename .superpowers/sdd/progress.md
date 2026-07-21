@@ -12,3 +12,5 @@ Task 4: complete (commits 0a94484..f7943e6, spec pass, quality approved)
 Task 5: complete (commits ae25034..951afe5, spec pass, quality approved)
   Minor (process): red-run evidence in report mis-transcribed (green 15/15 corroborated by editmode.xml); hysteresis ordering untestable by design (plan-inherent)
 Task 6: complete (commits 1bb9515..1ae1c62 + fix ad2c2b9, spec pass, quality approved, post-cap invariant coverage added)
+Task 7: complete (commits 79feceb..36894dc, spec pass, quality approved; playmode smoke test infra added)
+  Minor (folded into Task 8): PlayMode asmdef missing includePlatforms Editor; wheel-attach assert near-tautological
