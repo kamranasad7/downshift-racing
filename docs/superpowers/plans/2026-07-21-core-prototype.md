@@ -1868,9 +1868,9 @@ namespace Downshift.EditorTools
             hud.brakeButton = brake.gameObject.AddComponent<HoldButton>();
 
             var up = Button(canvasGo, "GearUp", new Vector2(760, -280), new Vector2(280, 160), "GEAR +");
-            up.onClick.AddListener(vehicle.GearUp);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(up.onClick, vehicle.GearUp);
             var down = Button(canvasGo, "GearDown", new Vector2(760, -460), new Vector2(280, 160), "GEAR -");
-            down.onClick.AddListener(vehicle.GearDown);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(down.onClick, vehicle.GearDown);
 
             var panel = new GameObject("ResultsPanel");
             panel.transform.SetParent(canvasGo.transform, false);
@@ -1881,7 +1881,7 @@ namespace Downshift.EditorTools
             hud.resultsPanel = panel;
             hud.resultsText = Label(panel, "ResultText", new Vector2(0, 60), 56);
             var restart = Button(panel, "RestartBtn", new Vector2(0, -100), new Vector2(320, 120), "RESTART");
-            restart.onClick.AddListener(run.Restart);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(restart.onClick, run.Restart);
 
             return hud;
         }
