@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 8958879423445070688}
   - component: {fileID: 7766554823921485315}
   - component: {fileID: 9101645057605702063}
+  - component: {fileID: 4310794075485266449}
   m_Layer: 0
   m_Name: Hatchback
   m_TagString: Player
@@ -318,6 +319,19 @@ WheelJoint2D:
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
+--- !u!114 &4310794075485266449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670877181077160362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3c9903c6e687f40876f1488050de58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Downshift.Runtime::Downshift.VehicleController
+  stats: {fileID: 11400000, guid: 09f9202873bb9754cb3134a84905d4fa, type: 2}
 --- !u!1 &4316120222087276248
 GameObject:
   m_ObjectHideFlags: 0

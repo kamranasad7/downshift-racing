@@ -37,3 +37,4 @@ MonoBehaviour:
   brakeMaxTemp: 100
   brakeReengageTemp: 45
   creepForce: 150
+  airTiltTorque: 3000

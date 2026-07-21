@@ -10,6 +10,9 @@ namespace Downshift.EditorTools
         public static void Build()
         {
             var stats = AssetDatabase.LoadAssetAtPath<VehicleStats>("Assets/Data/Hatchback.asset");
+            // loading alone doesn't dirty the asset, so newly-added serialized fields
+            // (their in-memory class defaults) never get written back without this.
+            EditorUtility.SetDirty(stats);
             var square = SpriteFactory.Ensure("square", false);
             var circle = SpriteFactory.Ensure("circle", true);
 
@@ -37,6 +40,9 @@ namespace Downshift.EditorTools
             var roofCol = roof.AddComponent<BoxCollider2D>();
             roofCol.isTrigger = true;
             roofCol.size = new Vector2(2.0f, 0.2f);
+
+            var vc = root.AddComponent<VehicleController>();
+            vc.stats = stats;
 
             if (!AssetDatabase.IsValidFolder("Assets/Prefabs"))
                 AssetDatabase.CreateFolder("Assets", "Prefabs");
