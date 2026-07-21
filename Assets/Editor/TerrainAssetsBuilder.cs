@@ -58,6 +58,8 @@ namespace Downshift.EditorTools
             speedCam.vehicle = car.GetComponent<VehicleController>();
             Camera.main.gameObject.AddComponent<Unity.Cinemachine.CinemachineBrain>();
 
+            HudBuilder.Build(car.GetComponent<VehicleController>(), run);
+
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
                 AssetDatabase.CreateFolder("Assets", "Scenes");
             EditorSceneManager.SaveScene(scene, "Assets/Scenes/Run.unity");

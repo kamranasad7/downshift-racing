@@ -1,6 +1,6 @@
 {
     "name": "Downshift.EditorTools",
     "rootNamespace": "Downshift.EditorTools",
-    "references": ["Downshift.Runtime", "Unity.Cinemachine", "Unity.2D.SpriteShape.Runtime"],
+    "references": ["Downshift.Runtime", "Unity.Cinemachine", "Unity.2D.SpriteShape.Runtime", "Unity.TextMeshPro", "UnityEngine.UI"],
     "includePlatforms": ["Editor"]
 }
