@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08f78fbc26ac914dae24c4b39e93fc4, type: 3}
+  m_Name: Hatchback
+  m_EditorClassIdentifier: Downshift.Runtime::Downshift.VehicleStats
+  chassisMass: 1200
+  wheelRadius: 0.35
+  wheelFriction: 1.2
+  suspensionFrequency: 4
+  suspensionDamping: 0.7
+  gearRatios:
+  - 3.2
+  - 2.1
+  - 1.4
+  - 1
+  - 0.8
+  finalDrive: 3.7
+  redlineRpm: 6500
+  engineBrakeTorque: 260
+  engineHeatPerRpmOverRedline: 0.02
+  engineCoolPerSecond: 6
+  engineMaxTemp: 100
+  brakeTorque: 900
+  brakeHeatPerSecondAtRef: 14
+  brakeHeatRefSpeed: 20
+  brakeCoolPerSecond: 4
+  brakeFadeStartTemp: 60
+  brakeMaxTemp: 100
+  brakeReengageTemp: 45
+  creepForce: 150
