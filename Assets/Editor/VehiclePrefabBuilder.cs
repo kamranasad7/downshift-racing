@@ -38,6 +38,7 @@ namespace Downshift.EditorTools
             var roofCol = roof.AddComponent<BoxCollider2D>();
             roofCol.isTrigger = true;
             roofCol.size = new Vector2(2.0f, 0.2f);
+            roof.AddComponent<RoofCrashDetector>();
 
             var vc = root.AddComponent<VehicleController>();
             vc.stats = stats;

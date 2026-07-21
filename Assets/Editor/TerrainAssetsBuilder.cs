@@ -41,6 +41,11 @@ namespace Downshift.EditorTools
             var input = new GameObject("Input");
             input.AddComponent<KeyboardInput>().vehicle = car.GetComponent<VehicleController>();
 
+            var runGo = new GameObject("RunManager");
+            var run = runGo.AddComponent<RunManager>();
+            run.vehicle = car.GetComponent<VehicleController>();
+            car.GetComponentInChildren<RoofCrashDetector>().runManager = run;
+
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
                 AssetDatabase.CreateFolder("Assets", "Scenes");
             EditorSceneManager.SaveScene(scene, "Assets/Scenes/Run.unity");

@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &563612332
+--- !u!1 &797724527
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 563612334}
-  - component: {fileID: 563612333}
+  - component: {fileID: 797724529}
+  - component: {fileID: 797724528}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -136,26 +136,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &563612333
+--- !u!114 &797724528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563612332}
+  m_GameObject: {fileID: 797724527}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87181fce317b81a429d906774c4ab76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Downshift.Runtime::Downshift.KeyboardInput
-  vehicle: {fileID: 2066530122}
---- !u!4 &563612334
+  vehicle: {fileID: 1413928091}
+--- !u!4 &797724529
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563612332}
+  m_GameObject: {fileID: 797724527}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -164,7 +164,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1099370571
+--- !u!1 &814079290
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,8 +172,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1099370573}
-  - component: {fileID: 1099370572}
+  - component: {fileID: 814079292}
+  - component: {fileID: 814079291}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -181,30 +181,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1099370572
+--- !u!114 &814079291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099370571}
+  m_GameObject: {fileID: 814079290}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a41b7ff832086594cafad166652a1e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Downshift.Runtime::Downshift.TerrainStreamer
   config: {fileID: 11400000, guid: 6e5fe1237f857ad4aa25c6d81351b697, type: 2}
-  target: {fileID: 2066530123}
+  target: {fileID: 1413928092}
   activeChunks: 3
   shapeProfile: {fileID: 11400000, guid: 92dffde83ccb508478d350ec8512dd00, type: 2}
   bottomDepth: 30
---- !u!4 &1099370573
+--- !u!4 &814079292
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099370571}
+  m_GameObject: {fileID: 814079290}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -213,7 +213,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1940565833
+--- !u!1 &1320786038
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,9 +221,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1940565836}
-  - component: {fileID: 1940565835}
-  - component: {fileID: 1940565834}
+  - component: {fileID: 1320786040}
+  - component: {fileID: 1320786039}
+  m_Layer: 0
+  m_Name: RunManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1320786039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320786038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4d9b2661124614c8a1c63ce026d6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Downshift.Runtime::Downshift.RunManager
+  vehicle: {fileID: 1413928091}
+  resultsDelay: 1.5
+--- !u!4 &1320786040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320786038}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1384459700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384459703}
+  - component: {fileID: 1384459702}
+  - component: {fileID: 1384459701}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -231,21 +277,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1940565834
+--- !u!81 &1384459701
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940565833}
+  m_GameObject: {fileID: 1384459700}
   m_Enabled: 1
---- !u!20 &1940565835
+--- !u!20 &1384459702
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940565833}
+  m_GameObject: {fileID: 1384459700}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -290,13 +336,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1940565836
+--- !u!4 &1384459703
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940565833}
+  m_GameObject: {fileID: 1384459700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
@@ -305,7 +351,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2066530121
+--- !u!1001 &1413928090
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -353,6 +399,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2884298387723211471, guid: b5de85123ad06924d9e893519124e23a, type: 3}
+      propertyPath: runManager
+      value: 
+      objectReference: {fileID: 1320786039}
     - target: {fileID: 3670877181077160362, guid: b5de85123ad06924d9e893519124e23a, type: 3}
       propertyPath: m_Name
       value: Hatchback
@@ -362,10 +412,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5de85123ad06924d9e893519124e23a, type: 3}
---- !u!114 &2066530122 stripped
+--- !u!114 &1413928091 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4310794075485266449, guid: b5de85123ad06924d9e893519124e23a, type: 3}
-  m_PrefabInstance: {fileID: 2066530121}
+  m_PrefabInstance: {fileID: 1413928090}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -373,16 +423,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3c9903c6e687f40876f1488050de58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Downshift.Runtime::Downshift.VehicleController
---- !u!4 &2066530123 stripped
+--- !u!4 &1413928092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1158431726967334233, guid: b5de85123ad06924d9e893519124e23a, type: 3}
-  m_PrefabInstance: {fileID: 2066530121}
+  m_PrefabInstance: {fileID: 1413928090}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1940565836}
-  - {fileID: 2066530121}
-  - {fileID: 1099370573}
-  - {fileID: 563612334}
+  - {fileID: 1384459703}
+  - {fileID: 1413928090}
+  - {fileID: 814079292}
+  - {fileID: 797724529}
+  - {fileID: 1320786040}
