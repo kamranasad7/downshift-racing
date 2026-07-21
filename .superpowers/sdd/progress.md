@@ -25,3 +25,5 @@ Task 11: complete (commits ada9c23..710be55, spec pass, quality approved; Cinema
 Task 12: complete (commits d381bd7..447fe62 + fix 33295b0, spec pass after critical fix: hud button onClick now persistent listeners)
   Plan patched at source (HudBuilder persistent listeners; RoofCrashDetector trigger filter for task 13)
   Morning checklist: visual HUD layout, thumb reachability, button clicks in real Play mode
+Task 13: complete (commits ab27ab7..1e01ff8, spec pass, quality approved; isTrigger guard verified)
+  Minor (plan-inherent, for progression plan): collected pickups respawn if a chunk is rebuilt after backward roll (double-count coins edge case)
