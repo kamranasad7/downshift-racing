@@ -17,3 +17,4 @@ Task 7: complete (commits 79feceb..36894dc, spec pass, quality approved; playmod
 Task 8: complete (commits 50f9e2b..ca9ad63 + fix 65aff8c, spec pass, quality approved after comment strip)
   Ratified: playmode thresholds freeSpeed>1, brakeTemp>0.1, roll>+2 (measured physics: gear-0 engine braking caps free roll ~1.45 m/s)
   For balancing (morning): starter car gear-0 engine braking may be too strong (engineBrakeTorque 260, ratio 3.2, final 3.7)
+Task 9: complete (commits c06b7a0..8c62e16, spec pass, quality approved; asmdef SpriteShape refs adjudicated necessary+minimal)
