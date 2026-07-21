@@ -14,3 +14,6 @@ Task 5: complete (commits ae25034..951afe5, spec pass, quality approved)
 Task 6: complete (commits 1bb9515..1ae1c62 + fix ad2c2b9, spec pass, quality approved, post-cap invariant coverage added)
 Task 7: complete (commits 79feceb..36894dc, spec pass, quality approved; playmode smoke test infra added)
   Minor (folded into Task 8): PlayMode asmdef missing includePlatforms Editor; wheel-attach assert near-tautological
+Task 8: complete (commits 50f9e2b..ca9ad63 + fix 65aff8c, spec pass, quality approved after comment strip)
+  Ratified: playmode thresholds freeSpeed>1, brakeTemp>0.1, roll>+2 (measured physics: gear-0 engine braking caps free roll ~1.45 m/s)
+  For balancing (morning): starter car gear-0 engine braking may be too strong (engineBrakeTorque 260, ratio 3.2, final 3.7)
