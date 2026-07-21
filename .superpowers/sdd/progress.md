@@ -27,3 +27,7 @@ Task 12: complete (commits d381bd7..447fe62 + fix 33295b0, spec pass after criti
   Morning checklist: visual HUD layout, thumb reachability, button clicks in real Play mode
 Task 13: complete (commits ab27ab7..1e01ff8, spec pass, quality approved; isTrigger guard verified)
   Minor (plan-inherent, for progression plan): collected pickups respawn if a chunk is rebuilt after backward roll (double-count coins edge case)
+Final review: 2 Critical + 3 Important found across task seams; all fixed in 82c6dd7; re-verified VERIFIED per finding. Ready to merge.
+  Correction: T7 playmode asmdef includePlatforms was NOT applied in T8 (deliberately reverted - it reclassifies PlayMode tests); ledger note above was inaccurate.
+  Deferred to next plans: version-sort hardening, test TearDown hygiene, script dedup, DistanceM spawn offset, post-crash creep, gradePerMeter=0 guard, station integration test at real spawn offset.
+Task 14: PENDING USER (playtest checklist written to docs/superpowers/playtest-checklist.md; tag v0.1-prototype after)
