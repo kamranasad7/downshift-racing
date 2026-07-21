@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9262423d8a7c0141aa77768139e5103, type: 3}
+  m_Name: Terrain
+  m_EditorClassIdentifier: Downshift.Runtime::Downshift.TerrainConfig
+  seed: 42
+  baseGrade: 0.12
+  gradePerMeter: 0.00004
+  maxGrade: 0.45
+  bumpAmplitudeMin: 0.4
+  bumpAmplitudeMax: 2.5
+  bumpAmplitudeRampMeters: 2000
+  bumpFrequency: 0.035
+  pointSpacing: 2
+  pointsPerChunk: 64
+  maxLocalRise: 0.25

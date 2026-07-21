@@ -13,6 +13,8 @@ namespace Downshift.EditorTools
                 AssetDatabase.CreateFolder("Assets", "Data");
             if (AssetDatabase.LoadAssetAtPath<VehicleStats>("Assets/Data/Hatchback.asset") == null)
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<VehicleStats>(), "Assets/Data/Hatchback.asset");
+            if (AssetDatabase.LoadAssetAtPath<TerrainConfig>("Assets/Data/Terrain.asset") == null)
+                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<TerrainConfig>(), "Assets/Data/Terrain.asset");
             AssetDatabase.SaveAssets();
         }
     }
