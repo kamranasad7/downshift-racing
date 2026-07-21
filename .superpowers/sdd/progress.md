@@ -21,3 +21,4 @@ Task 9: complete (commits c06b7a0..8c62e16, spec pass, quality approved; asmdef 
 Task 10: complete (commits e32764c..2f40e3a, spec pass, quality approved; activeInputHandler 1->2 fix adjudicated necessary)
   Forward: Task 13 MUST filter trigger-vs-trigger in RoofCrashDetector (coin false-crash risk); input-system-vs-legacy decision for morning; Blown event no unsubscribe (benign)
   Morning checklist: R-key restart + scene reload manual verify
+Task 11: complete (commits ada9c23..710be55, spec pass, quality approved; Cinemachine asmdef refs necessary+minimal)
