@@ -8,8 +8,6 @@ public class VehicleRigPlayTests
     [TearDown]
     public void ResetVehicleInput()
     {
-        // static fields, so a failed assertion mid-test (thrown before a test's own
-        // cleanup line runs) would otherwise leak brake-held state into the next test.
         Downshift.VehicleInput.KeyboardBrake = false;
         Downshift.VehicleInput.UiBrake = false;
     }
@@ -38,9 +36,6 @@ public class VehicleRigPlayTests
 
         Assert.IsTrue(float.IsFinite(car.transform.position.x));
         Assert.IsTrue(float.IsFinite(car.transform.position.y));
-        // gear-0 engine braking (attached via VehicleController since Task 8) grows with speed and
-        // finds a stable low equilibrium velocity on this grade well before the old free-wheeling
-        // 5m/300-frame bar; measured net roll is ~3.4m, so require forward progress with margin.
         Assert.Greater(car.transform.position.x, startX + 2f, "car should roll downhill");
         float tilt = Mathf.Abs(Mathf.DeltaAngle(car.transform.eulerAngles.z, 0f));
         Assert.Less(tilt, 60f, "car should stay upright on the slope");
@@ -77,17 +72,11 @@ public class VehicleRigPlayTests
         Downshift.VehicleInput.UiBrake = false;
         for (int i = 0; i < 240; i++) yield return new WaitForFixedUpdate();
         float freeSpeed = vc.SpeedMs;
-        // gear-0 engine braking torque scales with speed, so free-rolling on this grade converges
-        // to a stable ~1.45 m/s terminal velocity within ~3s (measured via diagnostic instrumentation);
-        // the brief's 4f/2.5f fallback thresholds are both above what's reachable at that equilibrium.
         Assert.Greater(freeSpeed, 1f, "car should gather speed rolling free");
 
         Downshift.VehicleInput.KeyboardBrake = true;
         for (int i = 0; i < 180; i++) yield return new WaitForFixedUpdate();
         Assert.Less(vc.SpeedMs, freeSpeed * 0.7f, "braking should shed speed");
-        // at ~1.4 m/s free-roll speed, full brake torque (900) arrests the car almost
-        // instantly (<1s), after which heat accrual (proportional to current speed) stalls
-        // near zero; measured plateau is ~0.32, so >1f is unreachable regardless of duration.
         Assert.Greater(vc.Brakes.Temp, 0.1f, "brake temp should rise while braking");
         Downshift.VehicleInput.KeyboardBrake = false;
 

@@ -10,8 +10,6 @@ namespace Downshift.EditorTools
         public static void Build()
         {
             var stats = AssetDatabase.LoadAssetAtPath<VehicleStats>("Assets/Data/Hatchback.asset");
-            // loading alone doesn't dirty the asset, so newly-added serialized fields
-            // (their in-memory class defaults) never get written back without this.
             EditorUtility.SetDirty(stats);
             var square = SpriteFactory.Ensure("square", false);
             var circle = SpriteFactory.Ensure("circle", true);
