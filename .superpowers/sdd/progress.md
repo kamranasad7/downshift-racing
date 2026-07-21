@@ -22,3 +22,6 @@ Task 10: complete (commits e32764c..2f40e3a, spec pass, quality approved; active
   Forward: Task 13 MUST filter trigger-vs-trigger in RoofCrashDetector (coin false-crash risk); input-system-vs-legacy decision for morning; Blown event no unsubscribe (benign)
   Morning checklist: R-key restart + scene reload manual verify
 Task 11: complete (commits ada9c23..710be55, spec pass, quality approved; Cinemachine asmdef refs necessary+minimal)
+Task 12: complete (commits d381bd7..447fe62 + fix 33295b0, spec pass after critical fix: hud button onClick now persistent listeners)
+  Plan patched at source (HudBuilder persistent listeners; RoofCrashDetector trigger filter for task 13)
+  Morning checklist: visual HUD layout, thumb reachability, button clicks in real Play mode
