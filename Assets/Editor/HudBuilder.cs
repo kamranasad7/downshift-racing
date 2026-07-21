@@ -29,8 +29,8 @@ namespace Downshift.EditorTools
             hud.vehicle = vehicle;
             hud.runManager = run;
 
-            hud.brakeFill = Gauge(canvasGo, "BrakeGauge", new Vector2(-860, 440));
-            hud.engineFill = Gauge(canvasGo, "EngineGauge", new Vector2(-860, 390));
+            hud.brakeFill = Gauge(canvasGo, "BrakeGauge", new Vector2(-760, 440));
+            hud.engineFill = Gauge(canvasGo, "EngineGauge", new Vector2(-760, 390));
             hud.gearText = Label(canvasGo, "Gear", new Vector2(820, 440), 48);
             hud.speedText = Label(canvasGo, "Speed", new Vector2(0, 460), 40);
             hud.distanceText = Label(canvasGo, "Distance", new Vector2(0, 400), 32);

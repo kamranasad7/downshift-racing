@@ -35,5 +35,6 @@ namespace Downshift
         [Header("Misc")]
         public float creepForce = 150f;
         public float airTiltTorque = 3000f;
+        public float gravityScale = 1f;
     }
 }

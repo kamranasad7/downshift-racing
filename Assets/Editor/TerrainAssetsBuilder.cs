@@ -12,13 +12,26 @@ namespace Downshift.EditorTools
         [MenuItem("Downshift/Build/Terrain Shape Profile")]
         public static void BuildShapeProfile()
         {
-            if (AssetDatabase.LoadAssetAtPath<SpriteShape>("Assets/Art/TerrainShapeProfile.asset") != null) return;
-            var shape = ScriptableObject.CreateInstance<SpriteShape>();
-            shape.fillTexture = null;
-            var angleRange = new AngleRange { start = -180f, end = 180f, order = 0 };
-            angleRange.sprites.Add(SpriteFactory.Ensure("square", false));
-            shape.angleRanges.Add(angleRange);
-            AssetDatabase.CreateAsset(shape, "Assets/Art/TerrainShapeProfile.asset");
+            SpriteFactory.Ensure("square", false);
+            var importer = (TextureImporter)AssetImporter.GetAtPath("Assets/Art/square.png");
+            if (importer.wrapMode != TextureWrapMode.Repeat)
+            {
+                importer.wrapMode = TextureWrapMode.Repeat;
+                importer.SaveAndReimport();
+            }
+            var fill = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/square.png");
+
+            var shape = AssetDatabase.LoadAssetAtPath<SpriteShape>("Assets/Art/TerrainShapeProfile.asset");
+            if (shape == null)
+            {
+                shape = ScriptableObject.CreateInstance<SpriteShape>();
+                var angleRange = new AngleRange { start = -180f, end = 180f, order = 0 };
+                angleRange.sprites.Add(SpriteFactory.Ensure("square", false));
+                shape.angleRanges.Add(angleRange);
+                AssetDatabase.CreateAsset(shape, "Assets/Art/TerrainShapeProfile.asset");
+            }
+            shape.fillTexture = fill;
+            EditorUtility.SetDirty(shape);
             AssetDatabase.SaveAssets();
         }
 

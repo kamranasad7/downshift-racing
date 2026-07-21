@@ -39,6 +39,11 @@ namespace Downshift
                 _wheels[i] = _joints[i].connectedBody;
                 _wheelCols[i] = _wheels[i].GetComponent<Collider2D>();
             }
+            if (stats != null)
+            {
+                _rb.gravityScale = stats.gravityScale;
+                foreach (var w in _wheels) w.gravityScale = stats.gravityScale;
+            }
         }
 
         public void GearUp() => Shift(+1);
