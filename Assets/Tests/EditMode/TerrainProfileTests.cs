@@ -46,6 +46,11 @@ public class TerrainProfileTests
             var h = TerrainProfile.ChunkHeights(chunk, c);
             Assert.Less(h[h.Length - 1], h[0]);
         }
+        for (int chunk = 64; chunk < 75; chunk++)
+        {
+            var h = TerrainProfile.ChunkHeights(chunk, c);
+            Assert.Less(h[h.Length - 1], h[0]);
+        }
     }
 
     [Test]
@@ -53,6 +58,12 @@ public class TerrainProfileTests
     {
         var c = C();
         for (int chunk = 0; chunk < 40; chunk++)
+        {
+            var h = TerrainProfile.ChunkHeights(chunk, c);
+            for (int i = 1; i < h.Length; i++)
+                Assert.LessOrEqual(h[i] - h[i - 1], c.maxLocalRise + 0.0001f);
+        }
+        for (int chunk = 64; chunk < 75; chunk++)
         {
             var h = TerrainProfile.ChunkHeights(chunk, c);
             for (int i = 1; i < h.Length; i++)
