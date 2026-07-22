@@ -5,7 +5,7 @@ $proj = $PSScriptRoot
 $editorRoot = "C:\Program Files\Unity\Hub\Editor"
 $unity = Get-ChildItem $editorRoot -Directory |
     Where-Object Name -like "6000.3.*" |
-    Sort-Object { [version]($_.Name -replace 'f\d+$', '') } -Descending | Select-Object -First 1
+    Sort-Object { [version]($_.Name -replace '[abfp]\d+$', '') } -Descending | Select-Object -First 1
 if (-not $unity) { throw "No Unity 6000.3.x found under $editorRoot" }
 $modeLower = $Mode.ToLower()
 $results = Join-Path $proj "TestResults\$modeLower.xml"
