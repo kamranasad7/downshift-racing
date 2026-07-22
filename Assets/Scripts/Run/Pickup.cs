@@ -12,7 +12,7 @@ namespace Downshift
             if (vehicle == null) return;
             switch (kind)
             {
-                case PickupKind.Coin: Wallet.Coins++; break;
+                case PickupKind.Coin: Wallet.Coins++; GameAudio.PlayCoin(); break;
                 case PickupKind.Coolant: vehicle.CoolPartial(30f, 30f); break;
                 case PickupKind.Station: vehicle.CoolFull(); break;
             }

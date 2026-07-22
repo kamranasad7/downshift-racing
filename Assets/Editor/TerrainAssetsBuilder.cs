@@ -128,6 +128,11 @@ namespace Downshift.EditorTools
 
             HudBuilder.Build(car.GetComponent<VehicleController>(), run);
 
+            var audioGo = new GameObject("Audio");
+            var audio = audioGo.AddComponent<GameAudio>();
+            audio.vehicle = car.GetComponent<VehicleController>();
+            audio.runManager = run;
+
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
                 AssetDatabase.CreateFolder("Assets", "Scenes");
             EditorSceneManager.SaveScene(scene, "Assets/Scenes/Run.unity");
