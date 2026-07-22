@@ -33,3 +33,5 @@ Final review: 2 Critical + 3 Important found across task seams; all fixed in 82c
 Task 14: PENDING USER (playtest checklist written to docs/superpowers/playtest-checklist.md; tag v0.1-prototype after)
 --- OVERNIGHT 2 (progression + visual + cleanup) ---
 Task A1: complete (6c12272 + meta fix, spec pass, quality approved after meta commit)
+Task A2: complete (93519f7, spec pass, quality approved)
+  Note for A3 dispatch: ApplyTo clone ownership — destroy previous clone or accept per-run allocation (document)
