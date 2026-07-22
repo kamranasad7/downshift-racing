@@ -45,3 +45,4 @@ Task B1: complete (7816af5 + fix, spec pass after comment strip, quality approve
 Task B2: complete (e0e0f75, spec pass, quality approved; sRGB/linear vertex-color gotcha found+fixed, justified comment allowed; pixel-verified)
 Task B3: complete (ee7191e, spec pass, quality approved; fixed particle Play() and saved-material-asset bugs found via screenshots; 41/12 green)
 Task B4: complete (219bcc1, spec pass, quality approved; collider invariants byte-verified; PLAN B COMPLETE)
+Task C1: complete (5430d14 + test-teeth fix f76b463, spec pass, quality approved; terrain guard deviation adjudicated correct)
