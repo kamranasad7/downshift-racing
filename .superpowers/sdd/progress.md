@@ -43,3 +43,4 @@ Task B1: complete (7816af5 + fix, spec pass after comment strip, quality approve
   Implementer also fixed: sky sprite scale math, hills vertical recentering (drift bug)
   Observation logged: HUD speed/rpm/distance readouts questioned during fast descent (pre-existing; check in final review)
 Task B2: complete (e0e0f75, spec pass, quality approved; sRGB/linear vertex-color gotcha found+fixed, justified comment allowed; pixel-verified)
+Task B3: complete (ee7191e, spec pass, quality approved; fixed particle Play() and saved-material-asset bugs found via screenshots; 41/12 green)
