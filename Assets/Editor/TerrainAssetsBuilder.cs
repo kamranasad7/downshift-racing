@@ -9,32 +9,6 @@ namespace Downshift.EditorTools
 {
     public static class TerrainAssetsBuilder
     {
-        [MenuItem("Downshift/Build/Terrain Shape Profile")]
-        public static void BuildShapeProfile()
-        {
-            SpriteFactory.Ensure("square", false);
-            var importer = (TextureImporter)AssetImporter.GetAtPath("Assets/Art/square.png");
-            if (importer.wrapMode != TextureWrapMode.Repeat)
-            {
-                importer.wrapMode = TextureWrapMode.Repeat;
-                importer.SaveAndReimport();
-            }
-            var fill = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/square.png");
-
-            var shape = AssetDatabase.LoadAssetAtPath<SpriteShape>("Assets/Art/TerrainShapeProfile.asset");
-            if (shape == null)
-            {
-                shape = ScriptableObject.CreateInstance<SpriteShape>();
-                var angleRange = new AngleRange { start = -180f, end = 180f, order = 0 };
-                angleRange.sprites.Add(SpriteFactory.Ensure("square", false));
-                shape.angleRanges.Add(angleRange);
-                AssetDatabase.CreateAsset(shape, "Assets/Art/TerrainShapeProfile.asset");
-            }
-            shape.fillTexture = fill;
-            EditorUtility.SetDirty(shape);
-            AssetDatabase.SaveAssets();
-        }
-
         [MenuItem("Downshift/Build/Pickup Prefabs")]
         public static void BuildPickupPrefabs()
         {
@@ -63,7 +37,6 @@ namespace Downshift.EditorTools
         [MenuItem("Downshift/Build/Run Scene")]
         public static void BuildRunScene()
         {
-            BuildShapeProfile();
             var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
 
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Hatchback.prefab");
@@ -75,7 +48,6 @@ namespace Downshift.EditorTools
             var streamer = terrain.AddComponent<TerrainStreamer>();
             streamer.config = config;
             streamer.target = car.transform;
-            streamer.shapeProfile = AssetDatabase.LoadAssetAtPath<SpriteShape>("Assets/Art/TerrainShapeProfile.asset");
 
             BuildPickupPrefabs();
             streamer.coinPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Coin.prefab");

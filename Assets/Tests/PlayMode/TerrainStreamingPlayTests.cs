@@ -14,19 +14,16 @@ public class TerrainStreamingPlayTests : PlayModeCleanup
 
 #if UNITY_EDITOR
         var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Hatchback.prefab");
-        var shape = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.U2D.SpriteShape>("Assets/Art/TerrainShapeProfile.asset");
 #else
-        GameObject prefab = null; UnityEngine.U2D.SpriteShape shape = null;
+        GameObject prefab = null;
 #endif
         Assert.IsNotNull(prefab);
-        Assert.IsNotNull(shape);
 
         var car = Object.Instantiate(prefab, new Vector3(4f, TerrainProfile.Height(4f, config) + 2f, 0f), Quaternion.identity);
         var terrainGo = new GameObject("Terrain");
         var streamer = terrainGo.AddComponent<TerrainStreamer>();
         streamer.config = config;
         streamer.target = car.transform;
-        streamer.shapeProfile = shape;
 
         float lastX = car.transform.position.x;
         float minProgressWindow = float.MaxValue;
@@ -46,8 +43,8 @@ public class TerrainStreamingPlayTests : PlayModeCleanup
 
         int chunkChildren = 0;
         foreach (Transform child in terrainGo.transform)
-            if (child.GetComponent<UnityEngine.U2D.SpriteShapeController>() != null) chunkChildren++;
-        Assert.AreEqual(streamer.activeChunks, chunkChildren, "chunk pool should stay at fixed size");
+            if (child.GetComponent<MeshFilter>() != null && child.GetComponent<MeshFilter>().sharedMesh.vertexCount > 0) chunkChildren++;
+        Assert.AreEqual(streamer.activeChunks, chunkChildren, "chunk pool should stay at fixed size with built meshes");
 
         Object.Destroy(car);
         Object.Destroy(terrainGo);

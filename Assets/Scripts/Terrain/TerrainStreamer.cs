@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace Downshift
 {
@@ -8,14 +7,15 @@ namespace Downshift
         public TerrainConfig config;
         public Transform target;
         public int activeChunks = 3;
-        public SpriteShape shapeProfile;
         public float bottomDepth = 30f;
+        public Color groundColor = new Color(0.36f, 0.28f, 0.22f);
         public GameObject coinPrefab;
         public GameObject coolantPrefab;
         public GameObject stationPrefab;
 
         GameObject[] _chunks;
         int[] _chunkIndices;
+        Material _groundMaterial;
 
         public static int ChunkIndexAt(float x, TerrainConfig c)
         {
@@ -24,6 +24,7 @@ namespace Downshift
 
         void Start()
         {
+            _groundMaterial = new Material(Shader.Find("Sprites/Default")) { color = groundColor };
             _chunks = new GameObject[activeChunks];
             _chunkIndices = new int[activeChunks];
             for (int i = 0; i < activeChunks; i++)
@@ -56,29 +57,47 @@ namespace Downshift
             var heights = TerrainProfile.ChunkHeights(chunkIndex, config);
             float startX = chunkIndex * config.pointsPerChunk * config.pointSpacing;
 
-            var controller = go.GetComponent<SpriteShapeController>();
-            if (controller == null)
+            var filter = go.GetComponent<MeshFilter>();
+            if (filter == null)
             {
-                controller = go.AddComponent<SpriteShapeController>();
-                controller.spriteShape = shapeProfile;
+                filter = go.AddComponent<MeshFilter>();
+                go.AddComponent<MeshRenderer>().sharedMaterial = _groundMaterial;
                 go.AddComponent<EdgeCollider2D>();
+                filter.sharedMesh = new Mesh();
             }
 
-            var spline = controller.spline;
-            spline.Clear();
             float minY = float.MaxValue;
             for (int i = 0; i < heights.Length; i++) minY = Mathf.Min(minY, heights[i]);
+            float bottomY = minY - bottomDepth;
 
-            var colPts = new Vector2[heights.Length];
-            for (int i = 0; i < heights.Length; i++)
+            int n = heights.Length;
+            var vertices = new Vector3[n * 2];
+            var colPts = new Vector2[n];
+            for (int i = 0; i < n; i++)
             {
-                var p = new Vector3(startX + i * config.pointSpacing, heights[i], 0f);
-                spline.InsertPointAt(i, p);
-                spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-                colPts[i] = p;
+                float x = startX + i * config.pointSpacing;
+                vertices[i] = new Vector3(x, heights[i], 0f);
+                vertices[n + i] = new Vector3(x, bottomY, 0f);
+                colPts[i] = vertices[i];
             }
-            spline.InsertPointAt(heights.Length, new Vector3(startX + config.pointsPerChunk * config.pointSpacing, minY - bottomDepth, 0f));
-            spline.InsertPointAt(heights.Length + 1, new Vector3(startX, minY - bottomDepth, 0f));
+
+            var triangles = new int[(n - 1) * 6];
+            for (int i = 0; i < n - 1; i++)
+            {
+                int t = i * 6;
+                triangles[t] = i;
+                triangles[t + 1] = i + 1;
+                triangles[t + 2] = n + i;
+                triangles[t + 3] = i + 1;
+                triangles[t + 4] = n + i + 1;
+                triangles[t + 5] = n + i;
+            }
+
+            var mesh = filter.sharedMesh;
+            mesh.Clear();
+            mesh.vertices = vertices;
+            mesh.triangles = triangles;
+            mesh.RecalculateBounds();
 
             go.GetComponent<EdgeCollider2D>().points = colPts;
 
