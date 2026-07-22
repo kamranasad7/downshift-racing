@@ -20,6 +20,7 @@ namespace Downshift
 
         void Start()
         {
+            Time.timeScale = 1f;
             Wallet.Coins = 0;
             _startX = vehicle.transform.position.x;
             vehicle.Blown += OnBlown;
@@ -34,11 +35,12 @@ namespace Downshift
                 && Time.time - _failTime > resultsDelay && _machine.ToResults())
             {
                 BankRun();
+                Time.timeScale = 0f;
                 StateChanged?.Invoke(_machine.State);
             }
 
             if (_machine.State == RunState.Results && Input.GetKeyDown(KeyCode.R))
-                SceneManager.LoadScene("Run");
+                Restart();
         }
 
         public void NotifyCrash()
@@ -61,9 +63,17 @@ namespace Downshift
             }
         }
 
-        public void Restart() => SceneManager.LoadScene("Run");
+        public void Restart()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Run");
+        }
 
-        public void ToMenu() => SceneManager.LoadScene("Menu");
+        public void ToMenu()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Menu");
+        }
 
         void BankRun()
         {
