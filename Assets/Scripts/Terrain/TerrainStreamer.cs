@@ -61,7 +61,9 @@ namespace Downshift
             if (filter == null)
             {
                 filter = go.AddComponent<MeshFilter>();
-                go.AddComponent<MeshRenderer>().sharedMaterial = _groundMaterial;
+                var renderer = go.AddComponent<MeshRenderer>();
+                renderer.sharedMaterial = _groundMaterial;
+                renderer.sortingOrder = -10;
                 go.AddComponent<EdgeCollider2D>();
                 filter.sharedMesh = new Mesh();
             }

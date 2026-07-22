@@ -73,6 +73,8 @@ namespace Downshift.EditorTools
             speedCam.vehicle = car.GetComponent<VehicleController>();
             Camera.main.gameObject.AddComponent<Unity.Cinemachine.CinemachineBrain>();
 
+            BuildBackground(Camera.main.transform);
+
             HudBuilder.Build(car.GetComponent<VehicleController>(), run);
 
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
@@ -86,6 +88,39 @@ namespace Downshift.EditorTools
                 scenes.Add(new EditorBuildSettingsScene(scenePath, true));
                 EditorBuildSettings.scenes = scenes.ToArray();
             }
+        }
+
+        static void BuildBackground(Transform cam)
+        {
+            var skyGo = new GameObject("Sky");
+            var sky = skyGo.AddComponent<SkyGradient>();
+            sky.cam = cam;
+            sky.topColor = HexColor("2E3A59");
+            sky.horizonColor = HexColor("B8886B");
+
+            var far = new GameObject("FarHills").AddComponent<HillLayerBuilder>();
+            far.cam = cam;
+            far.color = HexColor("4A5578");
+            far.parallaxFactor = 0.15f;
+            far.baseline = 1f;
+            far.amplitude = 2f;
+            far.baseY = 1f;
+            far.sortingOrder = -90;
+
+            var near = new GameObject("NearHills").AddComponent<HillLayerBuilder>();
+            near.cam = cam;
+            near.color = HexColor("5D6B8C");
+            near.parallaxFactor = 0.35f;
+            near.baseline = -0.5f;
+            near.amplitude = 1.5f;
+            near.baseY = -0.5f;
+            near.sortingOrder = -80;
+        }
+
+        static Color HexColor(string hex)
+        {
+            ColorUtility.TryParseHtmlString("#" + hex, out var c);
+            return c;
         }
     }
 }
