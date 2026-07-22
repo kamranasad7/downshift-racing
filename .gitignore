@@ -12,3 +12,6 @@ TestResults/
 .vs/
 .utmp/
 crashlytics-build.properties
+
+[Aa]ssets/Screenshots/
+[Aa]ssets/Screenshots.meta

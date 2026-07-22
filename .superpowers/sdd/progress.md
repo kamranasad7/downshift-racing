@@ -36,3 +36,4 @@ Task A1: complete (6c12272 + meta fix, spec pass, quality approved after meta co
 Task A2: complete (93519f7, spec pass, quality approved)
   Note for A3 dispatch: ApplyTo clone ownership — destroy previous clone or accept per-run allocation (document)
 Task A3: complete (847d711 + flake fix 74261b5, spec pass, quality approved; 3x playmode stability verified 10/10)
+Task A4: complete (18ea7da, spec pass with accepted deviation: build-settings rewrite lives in MenuBuilder (more robust), quality approved; menu screenshot verified)
