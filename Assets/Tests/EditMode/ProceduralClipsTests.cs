@@ -42,12 +42,12 @@ public class ProceduralClipsTests
         var data = new float[clip.samples];
         clip.GetData(data, 0);
 
-        int window = 64;
-        float totalDelta = 0f;
-        for (int i = 0; i < window; i++)
-            totalDelta += Mathf.Abs(data[i] - data[data.Length - window + i]);
-        float avgDelta = totalDelta / window;
-        Assert.Less(avgDelta, 0.2f);
+        int n = data.Length;
+        float wrapJump = Mathf.Abs(data[0] - data[n - 1]);
+        float slopeEnd = data[n - 1] - data[n - 2];
+        float slopeWrap = data[0] - data[n - 1];
+        Assert.Less(wrapJump, 0.005f, "sample discontinuity at loop wrap would click");
+        Assert.Less(Mathf.Abs(slopeWrap - slopeEnd), 0.01f, "slope discontinuity at loop wrap would click");
     }
 
     [Test]
