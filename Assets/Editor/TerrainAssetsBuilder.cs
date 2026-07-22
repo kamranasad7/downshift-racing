@@ -20,7 +20,6 @@ namespace Downshift.EditorTools
         static void BuildOne(string name, bool circle, Color color, float scale, PickupKind kind)
         {
             string path = $"Assets/Prefabs/{name}.prefab";
-            if (AssetDatabase.LoadAssetAtPath<GameObject>(path) != null) return;
             var go = new GameObject(name);
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sprite = SpriteFactory.Ensure(circle ? "circle" : "square", circle);
@@ -30,8 +29,60 @@ namespace Downshift.EditorTools
             col.isTrigger = true;
             col.radius = 0.6f;
             go.AddComponent<Pickup>().kind = kind;
+
+            switch (kind)
+            {
+                case PickupKind.Coin: BuildCoinVisual(go); break;
+                case PickupKind.Coolant: BuildCoolantVisual(go); break;
+                case PickupKind.Station: BuildStationVisual(go, sr); break;
+            }
+
             PrefabUtility.SaveAsPrefabAsset(go, path);
             Object.DestroyImmediate(go);
+        }
+
+        static void BuildCoinVisual(GameObject go)
+        {
+            var circleSprite = SpriteFactory.Ensure("circle", true);
+            AddChild(go, "Rim", circleSprite, new Color(0.75f, 0.55f, 0.05f), Vector3.zero, Vector3.one * 0.55f);
+            var spin = go.AddComponent<CoinSpin>();
+            spin.flip = true;
+            spin.bob = false;
+            spin.spinSpeed = 3f;
+        }
+
+        static void BuildCoolantVisual(GameObject go)
+        {
+            var squareSprite = SpriteFactory.Ensure("square", false);
+            AddChild(go, "DropCap", squareSprite, new Color(0.45f, 0.75f, 1f), new Vector3(0f, 0.5f, 0f), Vector3.one * 0.45f, 45f);
+            var spin = go.AddComponent<CoinSpin>();
+            spin.flip = false;
+            spin.bob = true;
+            spin.spinSpeed = 2f;
+        }
+
+        static void BuildStationVisual(GameObject go, SpriteRenderer rootSprite)
+        {
+            rootSprite.enabled = false;
+            var barSprite = SpriteFactory.Ensure("square", false);
+            var barColor = new Color(0.1f, 0.45f, 0.2f);
+            AddChild(go, "PillarLeft", barSprite, barColor, new Vector3(-1.0f, 0.15f, 0f), new Vector3(0.22f, 1.7f, 1f));
+            AddChild(go, "PillarRight", barSprite, barColor, new Vector3(1.0f, 0.15f, 0f), new Vector3(0.22f, 1.7f, 1f));
+            AddChild(go, "Beam", barSprite, barColor, new Vector3(0f, 1.1f, 0f), new Vector3(2.3f, 0.28f, 1f));
+            AddChild(go, "Sign", barSprite, new Color(0.95f, 0.92f, 0.78f), new Vector3(0f, 1.1f, 0f), new Vector3(0.7f, 0.42f, 1f), sortingOrder: 2);
+        }
+
+        static void AddChild(GameObject parent, string name, Sprite sprite, Color color, Vector3 localPos, Vector3 localScale, float zRot = 0f, int sortingOrder = 1)
+        {
+            var child = new GameObject(name);
+            child.transform.SetParent(parent.transform, false);
+            child.transform.localPosition = localPos;
+            child.transform.localScale = localScale;
+            child.transform.localRotation = Quaternion.Euler(0f, 0f, zRot);
+            var sr = child.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+            sr.color = color;
+            sr.sortingOrder = sortingOrder;
         }
 
         [MenuItem("Downshift/Build/Run Scene")]
