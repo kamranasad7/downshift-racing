@@ -39,3 +39,6 @@ Task A3: complete (847d711 + flake fix 74261b5, spec pass, quality approved; 3x 
 Task A4: complete (18ea7da, spec pass with accepted deviation: build-settings rewrite lives in MenuBuilder (more robust), quality approved; menu screenshot verified)
 Task A5: complete (0e9d51f, spec pass, quality approved; 2x 11/11 stability, scene-leak sweep verified)
 Task A6/Plan A wrap: EditMode 41, PlayMode 11 all green; screenshots deferred to morning report (post-visual-pass)
+Task B1: complete (7816af5 + fix, spec pass after comment strip, quality approved; sky/parallax verified by screenshot incl 28s stress)
+  Implementer also fixed: sky sprite scale math, hills vertical recentering (drift bug)
+  Observation logged: HUD speed/rpm/distance readouts questioned during fast descent (pre-existing; check in final review)
