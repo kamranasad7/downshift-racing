@@ -5,7 +5,10 @@ using Downshift;
 public abstract class PlayModeCleanup
 {
     static readonly string[] SpawnNames =
-        { "Ground", "Slope", "RunManager", "HUD", "EventSystem", "Terrain", "MainCam", "CM Follow", "Push" };
+        {
+            "Ground", "Slope", "RunManager", "HUD", "EventSystem", "Terrain", "MainCam", "CM Follow", "Push",
+            "Canvas", "Main Camera", "Input", "Hatchback"
+        };
 
     [TearDown]
     public void SweepScene()
