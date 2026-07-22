@@ -3,15 +3,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class VehicleRigPlayTests
+public class VehicleRigPlayTests : PlayModeCleanup
 {
-    [TearDown]
-    public void ResetVehicleInput()
-    {
-        Downshift.VehicleInput.KeyboardBrake = false;
-        Downshift.VehicleInput.UiBrake = false;
-    }
-
     [UnityTest]
     public IEnumerator CarLandsAndRollsDownSlope()
     {

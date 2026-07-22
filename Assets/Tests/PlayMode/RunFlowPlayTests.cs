@@ -4,15 +4,8 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Downshift;
 
-public class RunFlowPlayTests
+public class RunFlowPlayTests : PlayModeCleanup
 {
-    [TearDown]
-    public void ResetInput()
-    {
-        VehicleInput.KeyboardBrake = false;
-        VehicleInput.UiBrake = false;
-    }
-
     GameObject BuildFlatGround(float y)
     {
         var ground = new GameObject("Ground");
@@ -69,6 +62,7 @@ public class RunFlowPlayTests
         vc.stats = Object.Instantiate(vc.stats);
         vc.stats.engineMaxTemp = 0.01f;
         vc.stats.redlineRpm = 1f;
+        vc.stats.engineHeatStartRpm = 0f;
         var runGo = new GameObject("RunManager");
         var run = runGo.AddComponent<RunManager>();
         run.vehicle = vc;

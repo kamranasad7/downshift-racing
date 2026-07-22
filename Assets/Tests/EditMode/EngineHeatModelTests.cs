@@ -8,26 +8,52 @@ public class EngineHeatModelTests
     {
         var s = ScriptableObject.CreateInstance<VehicleStats>();
         s.redlineRpm = 6000f;
-        s.engineHeatPerRpmOverRedline = 0.01f;
+        s.engineHeatStartRpm = 3000f;
+        s.engineHeatAtRedline = 10f;
         s.engineCoolPerSecond = 5f;
         s.engineMaxTemp = 100f;
         return s;
     }
 
     [Test]
-    public void HeatsAboveRedlineProportionally()
+    public void CoolsBelowHeatStartRpm()
     {
         var s = S();
-        float t = EngineHeatModel.Step(20f, 7000f, s, 1f);
-        Assert.AreEqual(20f + 1000f * 0.01f, t, 0.001f);
+        Assert.AreEqual(15f, EngineHeatModel.Step(20f, 2000f, s, 1f), 0.001f);
+        Assert.AreEqual(15f, EngineHeatModel.Step(20f, 3000f, s, 1f), 0.001f);
     }
 
     [Test]
-    public void CoolsBelowRedline()
+    public void HeatsLightlyJustAboveStart()
     {
         var s = S();
-        float t = EngineHeatModel.Step(20f, 3000f, s, 1f);
-        Assert.AreEqual(15f, t, 0.001f);
+        float t = EngineHeatModel.Step(20f, 3300f, s, 1f);
+        Assert.AreEqual(20f + 10f * 0.01f, t, 0.001f);
+    }
+
+    [Test]
+    public void HeatsQuadraticallyTowardRedline()
+    {
+        var s = S();
+        float t = EngineHeatModel.Step(20f, 4500f, s, 1f);
+        Assert.AreEqual(20f + 10f * 0.25f, t, 0.001f);
+    }
+
+    [Test]
+    public void HeatAtRedlineEqualsConfiguredRate()
+    {
+        var s = S();
+        float t = EngineHeatModel.Step(20f, 6000f, s, 1f);
+        Assert.AreEqual(30f, t, 0.001f);
+    }
+
+    [Test]
+    public void HeatingAcceleratesPastRedline()
+    {
+        var s = S();
+        float atRedline = EngineHeatModel.Step(20f, 6000f, s, 1f) - 20f;
+        float pastRedline = EngineHeatModel.Step(20f, 9000f, s, 1f) - 20f;
+        Assert.AreEqual(atRedline * 4f, pastRedline, 0.001f);
     }
 
     [Test]

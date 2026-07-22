@@ -23,18 +23,21 @@ MonoBehaviour:
   - 1.4
   - 1
   - 0.8
-  finalDrive: 3.7
-  redlineRpm: 6500
-  engineBrakeTorque: 260
-  engineHeatPerRpmOverRedline: 0.02
+  finalDrive: 11
+  idleRpm: 900
+  redlineRpm: 6000
+  engineBrakeTorque: 12
+  engineHeatStartRpm: 3000
+  engineHeatAtRedline: 12
   engineCoolPerSecond: 6
   engineMaxTemp: 100
-  brakeTorque: 900
+  brakeTorque: 300
   brakeHeatPerSecondAtRef: 14
   brakeHeatRefSpeed: 20
-  brakeCoolPerSecond: 4
+  brakeCoolPerSecond: 2
   brakeFadeStartTemp: 60
   brakeMaxTemp: 100
   brakeReengageTemp: 45
-  creepForce: 150
+  creepForce: 200
   airTiltTorque: 3000
+  gravityScale: 1

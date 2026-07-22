@@ -12,6 +12,7 @@ namespace Downshift
         public Image engineFill;
         public TMP_Text gearText;
         public TMP_Text speedText;
+        public TMP_Text rpmText;
         public TMP_Text distanceText;
         public TMP_Text coinText;
         public GameObject resultsPanel;
@@ -42,6 +43,9 @@ namespace Downshift
             engineFill.color = Color.Lerp(Color.green, Color.red, engineFill.fillAmount);
             gearText.text = $"G{vehicle.CurrentGear + 1}";
             speedText.text = $"{Mathf.FloorToInt(vehicle.SpeedMs * 3.6f)} km/h";
+            rpmText.text = $"{Mathf.FloorToInt(vehicle.EngineRpm)} rpm";
+            rpmText.color = Color.Lerp(Color.white, Color.red,
+                Mathf.Clamp01(vehicle.EngineRpm / vehicle.stats.redlineRpm));
             distanceText.text = $"{Mathf.FloorToInt(runManager.DistanceM)} m";
             coinText.text = $"{Wallet.Coins} c";
         }

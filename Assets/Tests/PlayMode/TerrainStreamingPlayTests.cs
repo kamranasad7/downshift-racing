@@ -4,15 +4,8 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Downshift;
 
-public class TerrainStreamingPlayTests
+public class TerrainStreamingPlayTests : PlayModeCleanup
 {
-    [TearDown]
-    public void ResetInput()
-    {
-        VehicleInput.KeyboardBrake = false;
-        VehicleInput.UiBrake = false;
-    }
-
     [UnityTest]
     public IEnumerator CarDescendsStreamedTerrainWithoutSticking()
     {

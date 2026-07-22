@@ -72,11 +72,10 @@ namespace Downshift
             if (_blown) { ReleaseMotors(); return; }
             float dt = Time.fixedDeltaTime;
 
-            float wheelDeg = 0f;
-            foreach (var w in _wheels)
-                wheelDeg = Mathf.Max(wheelDeg, Mathf.Abs(w.angularVelocity));
+            float wheelDeg = SpeedMs / stats.wheelRadius * Mathf.Rad2Deg;
             float ratio = stats.gearRatios[_gear];
-            EngineRpm = Drivetrain.EngineRpm(wheelDeg, ratio, stats.finalDrive);
+            float rawRpm = Drivetrain.EngineRpm(wheelDeg, ratio, stats.finalDrive);
+            EngineRpm = Mathf.Max(stats.idleRpm, rawRpm);
 
             _engineTemp = EngineHeatModel.Step(_engineTemp, EngineRpm, stats, dt);
             _brakes = BrakeModel.Step(_brakes, VehicleInput.BrakeHeld, SpeedMs, stats, dt);
@@ -85,7 +84,7 @@ namespace Downshift
                 ? stats.brakeTorque * BrakeModel.Effectiveness(_brakes, stats)
                 : 0f;
             float engineBrake = Drivetrain.EngineBrakeWheelTorque(
-                EngineRpm, stats.redlineRpm, ratio, stats.finalDrive, stats.engineBrakeTorque);
+                rawRpm, stats.redlineRpm, ratio, stats.finalDrive, stats.engineBrakeTorque);
 
             float resist = brakeTorque + engineBrake;
             foreach (var j in _joints)

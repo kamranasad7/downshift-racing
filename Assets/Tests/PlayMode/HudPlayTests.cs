@@ -5,15 +5,8 @@ using UnityEngine.TestTools;
 using Downshift;
 using Downshift.EditorTools;
 
-public class HudPlayTests
+public class HudPlayTests : PlayModeCleanup
 {
-    [TearDown]
-    public void ResetInput()
-    {
-        VehicleInput.KeyboardBrake = false;
-        VehicleInput.UiBrake = false;
-    }
-
     [UnityTest]
     public IEnumerator HudTracksVehicleAndShowsResults()
     {

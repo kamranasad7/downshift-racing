@@ -6,10 +6,16 @@ namespace Downshift
     {
         public static float Step(float temp, float rpm, VehicleStats s, float dt)
         {
-            float over = rpm - s.redlineRpm;
-            float delta = over > 0f
-                ? over * s.engineHeatPerRpmOverRedline
-                : -s.engineCoolPerSecond;
+            float delta;
+            if (rpm <= s.engineHeatStartRpm)
+            {
+                delta = -s.engineCoolPerSecond;
+            }
+            else
+            {
+                float n = (rpm - s.engineHeatStartRpm) / Mathf.Max(1f, s.redlineRpm - s.engineHeatStartRpm);
+                delta = s.engineHeatAtRedline * n * n;
+            }
             return Mathf.Clamp(temp + delta * dt, 0f, s.engineMaxTemp);
         }
 

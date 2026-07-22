@@ -5,7 +5,7 @@ using UnityEngine.TestTools;
 using Unity.Cinemachine;
 using Downshift;
 
-public class SpeedCameraPlayTests
+public class SpeedCameraPlayTests : PlayModeCleanup
 {
     [UnityTest]
     public IEnumerator CameraZoomsOutWithSpeed()
