@@ -1,16 +1,19 @@
+param([ValidateSet("EditMode","PlayMode")][string]$Mode = "EditMode")
+
 $ErrorActionPreference = "Stop"
 $proj = $PSScriptRoot
 $editorRoot = "C:\Program Files\Unity\Hub\Editor"
 $unity = Get-ChildItem $editorRoot -Directory |
     Where-Object Name -like "6000.3.*" |
-    Sort-Object Name -Descending | Select-Object -First 1
+    Sort-Object { [version]($_.Name -replace 'f\d+$', '') } -Descending | Select-Object -First 1
 if (-not $unity) { throw "No Unity 6000.3.x found under $editorRoot" }
-$results = Join-Path $proj "TestResults\editmode.xml"
+$modeLower = $Mode.ToLower()
+$results = Join-Path $proj "TestResults\$modeLower.xml"
 New-Item -ItemType Directory -Force (Split-Path $results) | Out-Null
 Remove-Item $results -ErrorAction SilentlyContinue
 & "$($unity.FullName)\Editor\Unity.exe" -batchmode -projectPath $proj `
-    -runTests -testPlatform EditMode -testResults $results `
-    -logFile (Join-Path $proj "TestResults\editmode.log") | Out-Null
+    -runTests -testPlatform $Mode -testResults $results `
+    -logFile (Join-Path $proj "TestResults\$modeLower.log") | Out-Null
 if (-not (Test-Path $results)) { throw "No test results produced - Unity run failed; see log" }
 [xml]$xml = Get-Content $results
 $run = $xml."test-run"
