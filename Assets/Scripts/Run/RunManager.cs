@@ -36,7 +36,7 @@ namespace Downshift
             }
 
             if (_machine.State == RunState.Results && Input.GetKeyDown(KeyCode.R))
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene("Run");
         }
 
         public void NotifyCrash()
@@ -57,7 +57,9 @@ namespace Downshift
             }
         }
 
-        public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        public void Restart() => SceneManager.LoadScene("Run");
+
+        public void ToMenu() => SceneManager.LoadScene("Menu");
 
         void BankRun()
         {

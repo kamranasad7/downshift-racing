@@ -55,6 +55,8 @@ namespace Downshift.EditorTools
             hud.resultsText = Label(panel, "ResultText", new Vector2(0, 60), 56);
             var restart = Button(panel, "RestartBtn", new Vector2(0, -100), new Vector2(320, 120), "RESTART");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(restart.onClick, run.Restart);
+            var menuBtn = Button(panel, "MenuBtn", new Vector2(0, -240), new Vector2(320, 120), "MENU");
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(menuBtn.onClick, run.ToMenu);
 
             return hud;
         }
