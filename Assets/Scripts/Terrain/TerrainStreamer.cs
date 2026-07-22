@@ -8,7 +8,13 @@ namespace Downshift
         public Transform target;
         public int activeChunks = 3;
         public float bottomDepth = 30f;
-        public Color groundColor = new Color(0.36f, 0.28f, 0.22f);
+        public float stripDepth = 0.6f;
+        // Defaults are palette sRGB (#7A6A55 / #4A3F33 / ~60%surface-40%cream) pre-converted to
+        // linear space: mesh vertex colors bypass Unity's automatic sRGB->linear correction that
+        // material.color gets, so raw sRGB floats here would render washed out under Linear color space.
+        public Color surfaceColor = new Color(0.1946f, 0.1441f, 0.0908f);
+        public Color deepColor = new Color(0.0685f, 0.0497f, 0.0331f);
+        public Color stripColor = new Color(0.3814f, 0.3140f, 0.2269f);
         public GameObject coinPrefab;
         public GameObject coolantPrefab;
         public GameObject stationPrefab;
@@ -24,7 +30,7 @@ namespace Downshift
 
         void Start()
         {
-            _groundMaterial = new Material(Shader.Find("Sprites/Default")) { color = groundColor };
+            _groundMaterial = new Material(Shader.Find("Sprites/Default")) { color = Color.white };
             _chunks = new GameObject[activeChunks];
             _chunkIndices = new int[activeChunks];
             for (int i = 0; i < activeChunks; i++)
@@ -73,31 +79,43 @@ namespace Downshift
             float bottomY = minY - bottomDepth;
 
             int n = heights.Length;
-            var vertices = new Vector3[n * 2];
+            var vertices = new Vector3[n * 3];
+            var colors = new Color[n * 3];
             var colPts = new Vector2[n];
             for (int i = 0; i < n; i++)
             {
                 float x = startX + i * config.pointSpacing;
                 vertices[i] = new Vector3(x, heights[i], 0f);
-                vertices[n + i] = new Vector3(x, bottomY, 0f);
+                vertices[n + i] = new Vector3(x, heights[i] - stripDepth, 0f);
+                vertices[2 * n + i] = new Vector3(x, bottomY, 0f);
+                colors[i] = stripColor;
+                colors[n + i] = surfaceColor;
+                colors[2 * n + i] = deepColor;
                 colPts[i] = vertices[i];
             }
 
-            var triangles = new int[(n - 1) * 6];
+            var triangles = new int[(n - 1) * 12];
             for (int i = 0; i < n - 1; i++)
             {
-                int t = i * 6;
+                int t = i * 12;
                 triangles[t] = i;
                 triangles[t + 1] = i + 1;
                 triangles[t + 2] = n + i;
                 triangles[t + 3] = i + 1;
                 triangles[t + 4] = n + i + 1;
                 triangles[t + 5] = n + i;
+                triangles[t + 6] = n + i;
+                triangles[t + 7] = n + i + 1;
+                triangles[t + 8] = 2 * n + i;
+                triangles[t + 9] = n + i + 1;
+                triangles[t + 10] = 2 * n + i + 1;
+                triangles[t + 11] = 2 * n + i;
             }
 
             var mesh = filter.sharedMesh;
             mesh.Clear();
             mesh.vertices = vertices;
+            mesh.colors = colors;
             mesh.triangles = triangles;
             mesh.RecalculateBounds();
 
