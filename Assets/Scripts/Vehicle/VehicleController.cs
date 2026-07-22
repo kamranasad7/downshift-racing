@@ -30,6 +30,9 @@ namespace Downshift
 
         void Awake()
         {
+            if (stats != null && GameSession.Economy != null)
+                stats = Upgrades.ApplyTo(stats, GameSession.Save, GameSession.Economy);
+
             _rb = GetComponent<Rigidbody2D>();
             _joints = GetComponents<WheelJoint2D>();
             _wheels = new Rigidbody2D[_joints.Length];

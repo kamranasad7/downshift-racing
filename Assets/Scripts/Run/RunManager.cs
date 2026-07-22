@@ -14,6 +14,7 @@ namespace Downshift
 
         public RunState State => _machine.State;
         public float DistanceM => _distance;
+        public bool IsNewBest { get; private set; }
         public event System.Action<RunState> StateChanged;
 
         void Start()
@@ -29,7 +30,10 @@ namespace Downshift
 
             if ((_machine.State == RunState.Crashed || _machine.State == RunState.BlownUp)
                 && Time.time - _failTime > resultsDelay && _machine.ToResults())
+            {
+                BankRun();
                 StateChanged?.Invoke(_machine.State);
+            }
 
             if (_machine.State == RunState.Results && Input.GetKeyDown(KeyCode.R))
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -54,5 +58,13 @@ namespace Downshift
         }
 
         public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        void BankRun()
+        {
+            IsNewBest = DistanceM > GameSession.Save.bestDistanceM;
+            GameSession.Save.coins += Wallet.Coins;
+            if (IsNewBest) GameSession.Save.bestDistanceM = DistanceM;
+            GameSession.Persist();
+        }
     }
 }
