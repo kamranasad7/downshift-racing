@@ -31,3 +31,5 @@ Final review: 2 Critical + 3 Important found across task seams; all fixed in 82c
   Correction: T7 playmode asmdef includePlatforms was NOT applied in T8 (deliberately reverted - it reclassifies PlayMode tests); ledger note above was inaccurate.
   Deferred to next plans: version-sort hardening, test TearDown hygiene, script dedup, DistanceM spawn offset, post-crash creep, gradePerMeter=0 guard, station integration test at real spawn offset.
 Task 14: PENDING USER (playtest checklist written to docs/superpowers/playtest-checklist.md; tag v0.1-prototype after)
+--- OVERNIGHT 2 (progression + visual + cleanup) ---
+Task A1: complete (6c12272 + meta fix, spec pass, quality approved after meta commit)
