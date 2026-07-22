@@ -51,6 +51,11 @@ public class ProgressionPlayTests : PlayModeCleanup
         yield return null;
         Wallet.Coins = 7;
 
+        float startX = car.transform.position.x;
+        float moveDeadline = Time.time + 3f;
+        while (car.transform.position.x < startX + 0.05f && Time.time < moveDeadline)
+            yield return new WaitForFixedUpdate();
+
         run.NotifyCrash();
 
         float deadline = Time.time + 5f;
@@ -58,6 +63,7 @@ public class ProgressionPlayTests : PlayModeCleanup
             yield return null;
 
         Assert.AreEqual(RunState.Results, run.State);
+        Assert.Greater(run.DistanceM, 0f);
         Assert.IsTrue(run.IsNewBest);
 
         var saved = SaveStore.Load(tempPath);
