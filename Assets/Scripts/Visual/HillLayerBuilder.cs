@@ -83,9 +83,6 @@ namespace Downshift
             transform.position = new Vector3(x, y, transform.position.z);
 
             bool needsXRecenter = Mathf.Abs(cam.position.x - x) > width / 2f;
-            // Track descends without bound, so the camera's y drifts away from this
-            // layer's damped vertical follow just as unboundedly as x does; without this
-            // the ridge silhouette drifts above frame and the flat skirt fills the screen.
             bool needsYRecenter = Mathf.Abs(cam.position.y - y) > verticalRecenterMargin;
 
             if (needsXRecenter)
