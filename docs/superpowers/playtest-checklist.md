@@ -1,5 +1,16 @@
 # Downshift v0.1 playtest checklist
 
+## Overnight-2 additions (progression + visuals) — test these first
+
+- [ ] Menu opens at 0 c / BEST 0 m; PLAY starts a run; results MENU button returns; coins persist across app restarts
+- [ ] Buy an upgrade (cheapest is 100 c — or temporarily lower baseUpgradeCost in Assets/Resources/Economy.asset to feel it sooner) and confirm the car changes: BRAKES = later fade, RADIATOR = slower engine heat, GEARBOX = stronger engine braking, TIRES = more grip
+- [ ] Visual judgment: dawn sky gradient + two parallax hill layers + shaded terrain with path strip — keep/change palette?
+- [ ] Car detail (cabin, window, bumper, wheel hubs) + brake embers when braking hot + engine smoke near redline + blowup burst
+- [ ] Coins spin, coolant bobs as a droplet, service station reads as an arch
+- [ ] Results panel: distance, RESTART, MENU all reachable and working
+
+## Original checklist
+
 Open the project in Unity Hub (`D:\Projects\Unity\DownshiftRacing`), open `Assets/Scenes/Run.unity`, press Play.
 Controls: Space = brake, Up/Down arrows = gear up/down (air-tilt while airborne), R = restart from results.
 
