@@ -69,6 +69,7 @@ public class ProgressionPlayTests : PlayModeCleanup
         var saved = SaveStore.Load(tempPath);
         Assert.AreEqual(7, saved.coins);
         Assert.Greater(saved.bestDistanceM, 0f);
+        Assert.Less(saved.bestDistanceM, 5f);
 
         Object.Destroy(ground); Object.Destroy(car); Object.Destroy(runGo);
         if (File.Exists(tempPath)) File.Delete(tempPath);

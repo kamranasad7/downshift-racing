@@ -79,4 +79,21 @@ public class TerrainProfileTests
         float far = TerrainProfile.Height(8000f, c) - TerrainProfile.Height(8500f, c);
         Assert.Greater(far, near);
     }
+
+    [Test]
+    public void ZeroGradePerMeterIsFiniteAndDescending()
+    {
+        var c = C();
+        c.gradePerMeter = 0f;
+        c.baseGrade = c.maxGrade + 0.1f;
+
+        foreach (var x in new[] { 0f, 100f, 1000f, 5000f, 20000f })
+            Assert.IsTrue(float.IsFinite(TerrainProfile.Height(x, c)));
+
+        for (int chunk = 0; chunk < 3; chunk++)
+        {
+            var h = TerrainProfile.ChunkHeights(chunk, c);
+            Assert.Less(h[h.Length - 1], h[0]);
+        }
+    }
 }

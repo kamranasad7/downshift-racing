@@ -14,6 +14,8 @@ namespace Downshift
         float _engineTemp;
         int _gear;
         bool _blown;
+        bool _shutdown;
+        VehicleStats _statsClone;
 
         public int CurrentGear => _gear;
         public float EngineRpm { get; private set; }
@@ -31,7 +33,10 @@ namespace Downshift
         void Awake()
         {
             if (stats != null && GameSession.Economy != null)
+            {
                 stats = Upgrades.ApplyTo(stats, GameSession.Save, GameSession.Economy);
+                _statsClone = stats;
+            }
 
             _rb = GetComponent<Rigidbody2D>();
             _joints = GetComponents<WheelJoint2D>();
@@ -70,9 +75,16 @@ namespace Downshift
             return true;
         }
 
+        public void Shutdown() => _shutdown = true;
+
+        void OnDestroy()
+        {
+            if (_statsClone != null) Destroy(_statsClone);
+        }
+
         void FixedUpdate()
         {
-            if (_blown) { ReleaseMotors(); return; }
+            if (_shutdown || _blown) { ReleaseMotors(); return; }
             float dt = Time.fixedDeltaTime;
 
             float wheelDeg = SpeedMs / stats.wheelRadius * Mathf.Rad2Deg;

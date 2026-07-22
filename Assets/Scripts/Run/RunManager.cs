@@ -10,16 +10,18 @@ namespace Downshift
 
         readonly RunMachine _machine = new RunMachine();
         float _distance;
+        float _startX;
         float _failTime;
 
         public RunState State => _machine.State;
-        public float DistanceM => _distance;
+        public float DistanceM => Mathf.Max(0f, _distance - _startX);
         public bool IsNewBest { get; private set; }
         public event System.Action<RunState> StateChanged;
 
         void Start()
         {
             Wallet.Coins = 0;
+            _startX = vehicle.transform.position.x;
             vehicle.Blown += OnBlown;
         }
 
@@ -43,6 +45,7 @@ namespace Downshift
         {
             if (_machine.TryCrash())
             {
+                vehicle.Shutdown();
                 _failTime = Time.time;
                 StateChanged?.Invoke(_machine.State);
             }
@@ -52,6 +55,7 @@ namespace Downshift
         {
             if (_machine.TryBlowUp())
             {
+                vehicle.Shutdown();
                 _failTime = Time.time;
                 StateChanged?.Invoke(_machine.State);
             }

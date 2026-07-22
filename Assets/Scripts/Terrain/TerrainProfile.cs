@@ -6,13 +6,21 @@ namespace Downshift
     {
         public static float Height(float x, TerrainConfig c)
         {
-            float grade = Mathf.Min(c.baseGrade + c.gradePerMeter * x, c.maxGrade);
-            float trend = -(c.baseGrade * x + 0.5f * c.gradePerMeter * x * x);
-            if (grade >= c.maxGrade)
+            float trend;
+            if (c.gradePerMeter <= 0f)
             {
-                float xCap = (c.maxGrade - c.baseGrade) / c.gradePerMeter;
-                trend = -(c.baseGrade * xCap + 0.5f * c.gradePerMeter * xCap * xCap)
-                        - c.maxGrade * (x - xCap);
+                trend = -c.baseGrade * x;
+            }
+            else
+            {
+                float grade = Mathf.Min(c.baseGrade + c.gradePerMeter * x, c.maxGrade);
+                trend = -(c.baseGrade * x + 0.5f * c.gradePerMeter * x * x);
+                if (grade >= c.maxGrade)
+                {
+                    float xCap = (c.maxGrade - c.baseGrade) / c.gradePerMeter;
+                    trend = -(c.baseGrade * xCap + 0.5f * c.gradePerMeter * xCap * xCap)
+                            - c.maxGrade * (x - xCap);
+                }
             }
             float amp = Mathf.Lerp(c.bumpAmplitudeMin, c.bumpAmplitudeMax,
                 Mathf.Clamp01(x / c.bumpAmplitudeRampMeters));
