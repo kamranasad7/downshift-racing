@@ -47,3 +47,5 @@ Task B3: complete (ee7191e, spec pass, quality approved; fixed particle Play() a
 Task B4: complete (219bcc1, spec pass, quality approved; collider invariants byte-verified; PLAN B COMPLETE)
 Task C1: complete (5430d14 + test-teeth fix f76b463, spec pass, quality approved; terrain guard deviation adjudicated correct)
 Task C2: complete (cea34a6 + script fix, spec pass, quality approved after exit-code propagation fix; 42/13 green; PLAN C COMPLETE)
+Final overnight review: 2 Critical (test save pollution w/ real-file evidence; TIRES upgrade runtime no-op) + 1 Important + 2 Minor — ALL FIXED in 59f6dd0, per-fix VERIFIED. Suites 42 EditMode / 14 PlayMode green. Phantom save deleted. READY FOR MORNING PLAYTEST.
+Economy note for user: first upgrade ~4-7 runs at defaults; lower baseUpgradeCost in Assets/Resources/Economy.asset to feel a purchase sooner.
