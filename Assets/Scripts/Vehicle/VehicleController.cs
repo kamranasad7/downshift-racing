@@ -16,6 +16,7 @@ namespace Downshift
         bool _blown;
         bool _shutdown;
         VehicleStats _statsClone;
+        PhysicsMaterial2D _runtimeWheelMat;
 
         public int CurrentGear => _gear;
         public float EngineRpm { get; private set; }
@@ -23,6 +24,7 @@ namespace Downshift
         public BrakeState Brakes => _brakes;
         public float SpeedMs => _rb != null ? _rb.linearVelocity.magnitude : 0f;
         public bool EngineBlown => _blown;
+        public bool IsShutdown => _shutdown;
         public event System.Action Blown;
 
         public static int NextGear(int gear, int delta, int gearCount)
@@ -51,6 +53,17 @@ namespace Downshift
             {
                 _rb.gravityScale = stats.gravityScale;
                 foreach (var w in _wheels) w.gravityScale = stats.gravityScale;
+
+                _runtimeWheelMat = new PhysicsMaterial2D("WheelRuntime") { friction = stats.wheelFriction, bounciness = 0f };
+                foreach (var c in _wheelCols) c.sharedMaterial = _runtimeWheelMat;
+
+                foreach (var j in _joints)
+                {
+                    var s = j.suspension;
+                    s.dampingRatio = stats.suspensionDamping;
+                    s.frequency = stats.suspensionFrequency;
+                    j.suspension = s;
+                }
             }
         }
 
@@ -80,6 +93,7 @@ namespace Downshift
         void OnDestroy()
         {
             if (_statsClone != null) Destroy(_statsClone);
+            if (_runtimeWheelMat != null) Destroy(_runtimeWheelMat);
         }
 
         void FixedUpdate()

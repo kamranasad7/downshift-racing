@@ -35,6 +35,14 @@ namespace Downshift
             if (vehicle == null || vehicle.stats == null) return;
             var stats = vehicle.stats;
 
+            if (vehicle.IsShutdown)
+            {
+                SetRate(brakeEmbersFront, 0f);
+                SetRate(brakeEmbersRear, 0f);
+                SetRate(engineSmoke, 0f);
+                return;
+            }
+
             float emberT = Mathf.InverseLerp(stats.brakeFadeStartTemp, stats.brakeMaxTemp, vehicle.Brakes.Temp);
             SetRate(brakeEmbersFront, emberT * maxEmberRate);
             SetRate(brakeEmbersRear, emberT * maxEmberRate);

@@ -1,3 +1,4 @@
+using System.IO;
 using NUnit.Framework;
 using UnityEngine;
 using Downshift;
@@ -9,6 +10,14 @@ public abstract class PlayModeCleanup
             "Ground", "Slope", "RunManager", "HUD", "EventSystem", "Terrain", "MainCam", "CM Follow", "Push",
             "Canvas", "Main Camera", "Input", "Hatchback", "Sky", "FarHills", "NearHills"
         };
+
+    [SetUp]
+    public void SetupSave()
+    {
+        GameSession.PathOverride = Path.Combine(Path.GetTempPath(), "downshift_test_save.json");
+        if (File.Exists(GameSession.PathOverride)) File.Delete(GameSession.PathOverride);
+        GameSession.Reset();
+    }
 
     [TearDown]
     public void SweepScene()
@@ -23,5 +32,7 @@ public abstract class PlayModeCleanup
                 if (go.name == n) match = true;
             if (match) Object.Destroy(go);
         }
+        GameSession.PathOverride = null;
+        GameSession.Reset();
     }
 }

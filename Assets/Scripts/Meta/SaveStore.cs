@@ -24,7 +24,10 @@ namespace Downshift
 
         public static void Save(SaveModel m, string path)
         {
-            File.WriteAllText(path, JsonUtility.ToJson(m));
+            var tmp = path + ".tmp";
+            File.WriteAllText(tmp, JsonUtility.ToJson(m));
+            if (File.Exists(path)) File.Replace(tmp, path, null);
+            else File.Move(tmp, path);
         }
     }
 }

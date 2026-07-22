@@ -8,20 +8,9 @@ using Downshift;
 
 public class FullLoopPlayTests : PlayModeCleanup
 {
-    [TearDown]
-    public void ResetGameSession()
-    {
-        GameSession.PathOverride = null;
-        GameSession.Reset();
-    }
-
     [UnityTest]
     public IEnumerator MenuPlayRunCrashResultsMenuLoop()
     {
-        GameSession.PathOverride = Path.Combine(Path.GetTempPath(), "downshift_loop_test.json");
-        if (File.Exists(GameSession.PathOverride)) File.Delete(GameSession.PathOverride);
-        GameSession.Reset();
-
         SceneManager.LoadScene("Menu");
         yield return null;
         yield return null;

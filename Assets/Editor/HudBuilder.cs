@@ -50,12 +50,12 @@ namespace Downshift.EditorTools
             var pi = panel.AddComponent<Image>();
             pi.color = new Color(0, 0, 0, 0.75f);
             var prt = panel.GetComponent<RectTransform>();
-            prt.sizeDelta = new Vector2(700, 400);
+            prt.sizeDelta = new Vector2(700, 560);
             hud.resultsPanel = panel;
-            hud.resultsText = Label(panel, "ResultText", new Vector2(0, 60), 56);
-            var restart = Button(panel, "RestartBtn", new Vector2(0, -100), new Vector2(320, 120), "RESTART");
+            hud.resultsText = Label(panel, "ResultText", new Vector2(0, 120), 56);
+            var restart = Button(panel, "RestartBtn", new Vector2(0, -40), new Vector2(320, 120), "RESTART");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(restart.onClick, run.Restart);
-            var menuBtn = Button(panel, "MenuBtn", new Vector2(0, -240), new Vector2(320, 120), "MENU");
+            var menuBtn = Button(panel, "MenuBtn", new Vector2(0, -180), new Vector2(320, 120), "MENU");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(menuBtn.onClick, run.ToMenu);
 
             return hud;

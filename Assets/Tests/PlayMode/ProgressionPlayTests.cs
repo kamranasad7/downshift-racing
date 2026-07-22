@@ -7,13 +7,6 @@ using Downshift;
 
 public class ProgressionPlayTests : PlayModeCleanup
 {
-    [TearDown]
-    public void ResetGameSession()
-    {
-        GameSession.PathOverride = null;
-        GameSession.Reset();
-    }
-
     GameObject BuildFlatGround(float y)
     {
         var ground = new GameObject("Ground");
@@ -35,10 +28,7 @@ public class ProgressionPlayTests : PlayModeCleanup
     [UnityTest]
     public IEnumerator BankingPersistsCoinsAndBest()
     {
-        var tempPath = Path.Combine(Path.GetTempPath(), "downshift-save-" + System.Guid.NewGuid().ToString("N") + ".json");
-        if (File.Exists(tempPath)) File.Delete(tempPath);
-        GameSession.PathOverride = tempPath;
-        GameSession.Reset();
+        var tempPath = GameSession.PathOverride;
 
         var ground = BuildFlatGround(0f);
         var car = SpawnHatchback(new Vector3(4f, 1.5f, 0f));
@@ -78,10 +68,7 @@ public class ProgressionPlayTests : PlayModeCleanup
     [UnityTest]
     public IEnumerator UpgradeAppliesToSpawnedVehicle()
     {
-        var tempPath = Path.Combine(Path.GetTempPath(), "downshift-save-" + System.Guid.NewGuid().ToString("N") + ".json");
-        if (File.Exists(tempPath)) File.Delete(tempPath);
-        GameSession.PathOverride = tempPath;
-        GameSession.Reset();
+        var tempPath = GameSession.PathOverride;
 
         var save = new SaveModel();
         save.upgradeTiers[(int)UpgradeTrack.Brakes] = 2;
