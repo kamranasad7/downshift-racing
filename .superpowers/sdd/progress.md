@@ -51,3 +51,7 @@ Final overnight review: 2 Critical (test save pollution w/ real-file evidence; T
 Economy note for user: first upgrade ~4-7 runs at defaults; lower baseUpgradeCost in Assets/Resources/Economy.asset to feel a purchase sooner.
 Audio task: complete (409e137 + settings 0f9742b + test fix, spec pass, quality approved; loop-seam test now measures real wrap discontinuity)
   QUEUED for next playmode window: pause-fix suite run + audible check of engine/squeal/one-shots
+--- NIGHT 3 (hazards, settings/polish, android, prep) ---
+Recovery note: verification agent misfire killed + orphaned suite aborted; pause/audio verification folded into D2 suite run
+Task D1: complete (6d52e5d, spec pass, quality approved; TDD caught station-scan-radius bug; reviewer mutation-verified)
+  Minor folded into D2: make NothingBeforeHazardStartMeters non-vacuous (fixture hazardStartMeters 500)
