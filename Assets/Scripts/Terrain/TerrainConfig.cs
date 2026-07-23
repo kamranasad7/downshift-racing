@@ -23,5 +23,13 @@ namespace Downshift
         public float stationEveryMeters = 900f;
         public float pickupSparsityRampMeters = 4000f;
         public float pickupSparsityMaxMultiplier = 2.5f;
+
+        [Header("Hazards")]
+        public float hazardEveryMeters = 350f;
+        public float hazardMinSpacingMeters = 150f;
+        public float hazardRampMeters = 3000f;
+        public float hazardStartMeters = 250f;
+        public float signLeadMeters = 25f;
+        public float stationClearMeters = 60f;
     }
 }
