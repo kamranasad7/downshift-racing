@@ -55,3 +55,6 @@ Audio task: complete (409e137 + settings 0f9742b + test fix, spec pass, quality 
 Recovery note: verification agent misfire killed + orphaned suite aborted; pause/audio verification folded into D2 suite run
 Task D1: complete (6d52e5d, spec pass, quality approved; TDD caught station-scan-radius bug; reviewer mutation-verified)
   Minor folded into D2: make NothingBeforeHazardStartMeters non-vacuous (fixture hazardStartMeters 500)
+Task D2: complete (6d3ddb2, spec pass, all screenshots verified; rocks retuned to real chassis clearance; 56/16 green)
+  D2 exposed timescale leak across playmode tests (pause fix side effect) -> fixed in PlayModeCleanup TearDown (validated by E1 suite run)
+  Pause fix + audio verification: covered by D2's full 16/16 playmode run (both features' tests green)
