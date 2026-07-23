@@ -49,7 +49,8 @@ public class HazardPlacerTests
     public void NothingBeforeHazardStartMeters()
     {
         var c = C();
-        for (int i = 0; i < 5; i++)
+        c.hazardStartMeters = 500f;
+        for (int i = 0; i <= 10; i++)
             foreach (var h in HazardPlacer.PlacementsForChunk(i, c))
                 Assert.GreaterOrEqual(h.x, c.hazardStartMeters);
     }

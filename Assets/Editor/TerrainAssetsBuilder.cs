@@ -105,6 +105,12 @@ namespace Downshift.EditorTools
             streamer.coolantPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Coolant.prefab");
             streamer.stationPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Station.prefab");
 
+            HazardAssetsBuilder.BuildHazardPrefabs();
+            streamer.rocksPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Rocks.prefab");
+            streamer.ridgePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Ridge.prefab");
+            streamer.washboardPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Washboard.prefab");
+            streamer.signPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Sign.prefab");
+
             var input = new GameObject("Input");
             input.AddComponent<KeyboardInput>().vehicle = car.GetComponent<VehicleController>();
 

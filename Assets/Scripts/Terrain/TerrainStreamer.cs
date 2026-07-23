@@ -18,6 +18,10 @@ namespace Downshift
         public GameObject coinPrefab;
         public GameObject coolantPrefab;
         public GameObject stationPrefab;
+        public GameObject rocksPrefab;
+        public GameObject ridgePrefab;
+        public GameObject washboardPrefab;
+        public GameObject signPrefab;
 
         GameObject[] _chunks;
         int[] _chunkIndices;
@@ -121,9 +125,9 @@ namespace Downshift
 
             go.GetComponent<EdgeCollider2D>().points = colPts;
 
-            var old = go.transform.Find("Pickups");
+            var old = go.transform.Find("Spawned");
             if (old != null) Destroy(old.gameObject);
-            var parent = new GameObject("Pickups").transform;
+            var parent = new GameObject("Spawned").transform;
             parent.SetParent(go.transform, false);
             foreach (var (x, kind) in PickupPlacer.PlacementsForChunk(chunkIndex, config))
             {
@@ -131,6 +135,21 @@ namespace Downshift
                 if (prefab == null) continue;
                 float y = TerrainProfile.Height(x, config) + (kind == PickupKind.Station ? 1.4f : 1.2f);
                 var inst = Instantiate(prefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
+                inst.SetActive(true);
+            }
+            foreach (var (x, kind) in HazardPlacer.PlacementsForChunk(chunkIndex, config))
+            {
+                var prefab = kind == HazardKind.Rocks ? rocksPrefab : kind == HazardKind.Ridge ? ridgePrefab : washboardPrefab;
+                if (prefab == null) continue;
+                float y = TerrainProfile.Height(x, config);
+                var inst = Instantiate(prefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
+                inst.SetActive(true);
+            }
+            foreach (var x in HazardPlacer.SignsForChunk(chunkIndex, config))
+            {
+                if (signPrefab == null) continue;
+                float y = TerrainProfile.Height(x, config) + 1.6f;
+                var inst = Instantiate(signPrefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
                 inst.SetActive(true);
             }
         }
