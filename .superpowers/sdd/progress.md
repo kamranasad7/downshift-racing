@@ -63,3 +63,9 @@ D2 review: spec pass, quality approved (burying deviation adjudicated sound via 
 Task E2: complete (3e017b6, 58/58 + 17/17; pause menu wired, FullLoop confirms rebuilt scene end-to-end)
 Task E3: complete (2a965ce, 58/58 + 18/18; icon assignment verified via GetIcons readback; PLAN E COMPLETE)
 E1-E3 combined review: all SPEC pass, quality good, no blockers. Queued micro-hardening (apply after android build): reset IsPaused in NotifyCrash/OnBlown + gate pause panel on IsPaused && Descending. Reviewer note: E1 diff was missing from the package base (pulled via git show) - mind package ranges.
+--- ANDROID + FINAL (night 3) ---
+Android APK: SUCCESS. Builds/downshift-debug.apk 47MB, com.asadkamran.downshift, IL2CPP/ARM64, minSdk24, dev build. Platform switched back to StandaloneWindows64. (build agent parked repeatedly on waits; controller drove the build watch + cleanup + commit directly)
+Input: activeInputHandler 2->0 (legacy only) - resolves Android "Both" warning; needs one editor restart to fully apply. Nothing uses new Input System.
+Late fixes committed (1047d6c build infra, 2f2e560 pause hardening+input). EditMode 58 green post-fix.
+DEFERRED to user window: PlayMode 18 re-run after the 2-line pause fix + input handler change (low risk, EditMode green).
+Final whole-night review: running.
