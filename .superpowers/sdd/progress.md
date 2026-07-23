@@ -60,3 +60,4 @@ Task D2: complete (6d3ddb2, spec pass, all screenshots verified; rocks retuned t
   Pause fix + audio verification: covered by D2's full 16/16 playmode run (both features' tests green)
 Task E1: complete (1d79bb1, 58/58 + 16/16; timescale-leak fix confirmed live by full-suite completion). E1-E3 get one combined review after E3.
 D2 review: spec pass, quality approved (burying deviation adjudicated sound via wheel-radius reasoning; no action items)
+Task E2: complete (3e017b6, 58/58 + 17/17; pause menu wired, FullLoop confirms rebuilt scene end-to-end)
