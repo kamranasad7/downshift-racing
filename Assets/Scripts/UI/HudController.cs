@@ -17,12 +17,14 @@ namespace Downshift
         public TMP_Text coinText;
         public GameObject resultsPanel;
         public TMP_Text resultsText;
+        public TMP_Text newBestText;
         public GameObject pausePanel;
         public HoldButton brakeButton;
 
         void Start()
         {
             resultsPanel.SetActive(false);
+            newBestText.gameObject.SetActive(false);
             pausePanel.SetActive(false);
             runManager.StateChanged += OnState;
         }
@@ -33,6 +35,7 @@ namespace Downshift
             {
                 resultsPanel.SetActive(true);
                 resultsText.text = $"{Mathf.FloorToInt(runManager.DistanceM)} m";
+                newBestText.gameObject.SetActive(runManager.IsNewBest);
             }
         }
 

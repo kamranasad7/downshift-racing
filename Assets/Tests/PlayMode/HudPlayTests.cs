@@ -55,4 +55,47 @@ public class HudPlayTests : PlayModeCleanup
         Object.Destroy(ground); Object.Destroy(car); Object.Destroy(runGo);
         Object.Destroy(hud.gameObject);
     }
+
+    [UnityTest]
+    public IEnumerator NewBestBannerShowsOnFirstResults()
+    {
+        var ground = new GameObject("Ground");
+        var col = ground.AddComponent<EdgeCollider2D>();
+        var pts = new Vector2[60];
+        for (int i = 0; i < pts.Length; i++)
+            pts[i] = new Vector2(i * 4f, -i * 4f * 0.2f);
+        col.points = pts;
+
+#if UNITY_EDITOR
+        var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Hatchback.prefab");
+#else
+        GameObject prefab = null;
+#endif
+        var car = Object.Instantiate(prefab, new Vector3(2f, 1.5f, 0f), Quaternion.identity);
+        var vc = car.GetComponent<VehicleController>();
+        var runGo = new GameObject("RunManager");
+        var run = runGo.AddComponent<RunManager>();
+        run.vehicle = vc;
+        run.resultsDelay = 0.5f;
+        car.GetComponentInChildren<RoofCrashDetector>().runManager = run;
+
+        var hud = HudBuilder.Build(vc, run);
+        yield return null;
+
+        Assert.IsFalse(hud.newBestText.gameObject.activeSelf, "new best banner hidden before results");
+
+        for (int i = 0; i < 60; i++) yield return new WaitForFixedUpdate();
+
+        run.NotifyCrash();
+        float deadline = Time.time + 3f;
+        while (run.State != RunState.Results && Time.time < deadline) yield return null;
+        yield return null;
+
+        Assert.AreEqual(RunState.Results, run.State);
+        Assert.IsTrue(run.IsNewBest, "first run on a fresh save is always a new best");
+        Assert.IsTrue(hud.newBestText.gameObject.activeSelf, "new best banner shown on results when IsNewBest");
+
+        Object.Destroy(ground); Object.Destroy(car); Object.Destroy(runGo);
+        Object.Destroy(hud.gameObject);
+    }
 }

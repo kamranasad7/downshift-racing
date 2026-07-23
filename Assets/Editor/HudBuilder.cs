@@ -56,6 +56,9 @@ namespace Downshift.EditorTools
             prt.sizeDelta = new Vector2(700, 560);
             hud.resultsPanel = panel;
             hud.resultsText = Label(panel, "ResultText", new Vector2(0, 120), 56);
+            hud.newBestText = Label(panel, "NewBestText", new Vector2(0, 200), 44);
+            hud.newBestText.text = "NEW BEST!";
+            hud.newBestText.color = new Color(1f, 0.84f, 0f);
             var restart = Button(panel, "RestartBtn", new Vector2(0, -40), new Vector2(320, 120), "RESTART");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(restart.onClick, run.Restart);
             var menuBtn = Button(panel, "MenuBtn", new Vector2(0, -180), new Vector2(320, 120), "MENU");
