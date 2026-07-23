@@ -58,6 +58,7 @@ namespace Downshift
         {
             if (_machine.TryCrash())
             {
+                IsPaused = false;
                 vehicle.Shutdown();
                 _failTime = Time.time;
                 StateChanged?.Invoke(_machine.State);
@@ -68,6 +69,7 @@ namespace Downshift
         {
             if (_machine.TryBlowUp())
             {
+                IsPaused = false;
                 vehicle.Shutdown();
                 _failTime = Time.time;
                 StateChanged?.Invoke(_machine.State);

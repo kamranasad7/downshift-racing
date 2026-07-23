@@ -41,7 +41,7 @@ namespace Downshift
 
         void Update()
         {
-            pausePanel.SetActive(runManager.IsPaused);
+            pausePanel.SetActive(runManager.IsPaused && runManager.State == RunState.Descending);
 
             brakeFill.fillAmount = vehicle.Brakes.Temp / vehicle.stats.brakeMaxTemp;
             brakeFill.color = vehicle.Brakes.Faded ? Color.red :
