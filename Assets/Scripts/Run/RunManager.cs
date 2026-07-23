@@ -16,6 +16,7 @@ namespace Downshift
         public RunState State => _machine.State;
         public float DistanceM => Mathf.Max(0f, _distance - _startX);
         public bool IsNewBest { get; private set; }
+        public bool IsPaused { get; private set; }
         public event System.Action<RunState> StateChanged;
 
         void Start()
@@ -41,6 +42,16 @@ namespace Downshift
 
             if (_machine.State == RunState.Results && Input.GetKeyDown(KeyCode.R))
                 Restart();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                TogglePause();
+        }
+
+        public void TogglePause()
+        {
+            if (_machine.State != RunState.Descending) return;
+            IsPaused = !IsPaused;
+            Time.timeScale = IsPaused ? 0f : 1f;
         }
 
         public void NotifyCrash()

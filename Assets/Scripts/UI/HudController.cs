@@ -17,11 +17,13 @@ namespace Downshift
         public TMP_Text coinText;
         public GameObject resultsPanel;
         public TMP_Text resultsText;
+        public GameObject pausePanel;
         public HoldButton brakeButton;
 
         void Start()
         {
             resultsPanel.SetActive(false);
+            pausePanel.SetActive(false);
             runManager.StateChanged += OnState;
         }
 
@@ -36,6 +38,8 @@ namespace Downshift
 
         void Update()
         {
+            pausePanel.SetActive(runManager.IsPaused);
+
             brakeFill.fillAmount = vehicle.Brakes.Temp / vehicle.stats.brakeMaxTemp;
             brakeFill.color = vehicle.Brakes.Faded ? Color.red :
                 Color.Lerp(Color.green, Color.red, brakeFill.fillAmount);

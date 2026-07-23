@@ -45,6 +45,9 @@ namespace Downshift.EditorTools
             var down = Button(canvasGo, "GearDown", new Vector2(760, -460), new Vector2(280, 160), "GEAR -");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(down.onClick, vehicle.GearDown);
 
+            var pauseBtn = Button(canvasGo, "PauseBtn", new Vector2(940, 440), new Vector2(90, 90), "II");
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(pauseBtn.onClick, run.TogglePause);
+
             var panel = new GameObject("ResultsPanel");
             panel.transform.SetParent(canvasGo.transform, false);
             var pi = panel.AddComponent<Image>();
@@ -57,6 +60,22 @@ namespace Downshift.EditorTools
             UnityEditor.Events.UnityEventTools.AddPersistentListener(restart.onClick, run.Restart);
             var menuBtn = Button(panel, "MenuBtn", new Vector2(0, -180), new Vector2(320, 120), "MENU");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(menuBtn.onClick, run.ToMenu);
+
+            var pausePanel = new GameObject("PausePanel");
+            pausePanel.transform.SetParent(canvasGo.transform, false);
+            var ppi = pausePanel.AddComponent<Image>();
+            ppi.color = new Color(0, 0, 0, 0.75f);
+            var ppRt = pausePanel.GetComponent<RectTransform>();
+            ppRt.sizeDelta = new Vector2(700, 700);
+            hud.pausePanel = pausePanel;
+
+            Label(pausePanel, "PAUSED", new Vector2(0, 220), 56);
+            var resume = Button(pausePanel, "ResumeBtn", new Vector2(0, 80), new Vector2(320, 120), "RESUME");
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(resume.onClick, run.TogglePause);
+            var pauseRestart = Button(pausePanel, "PauseRestartBtn", new Vector2(0, -60), new Vector2(320, 120), "RESTART");
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(pauseRestart.onClick, run.Restart);
+            var pauseMenu = Button(pausePanel, "PauseMenuBtn", new Vector2(0, -200), new Vector2(320, 120), "MENU");
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(pauseMenu.onClick, run.ToMenu);
 
             return hud;
         }
