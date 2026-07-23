@@ -62,3 +62,4 @@ Task E1: complete (1d79bb1, 58/58 + 16/16; timescale-leak fix confirmed live by 
 D2 review: spec pass, quality approved (burying deviation adjudicated sound via wheel-radius reasoning; no action items)
 Task E2: complete (3e017b6, 58/58 + 17/17; pause menu wired, FullLoop confirms rebuilt scene end-to-end)
 Task E3: complete (2a965ce, 58/58 + 18/18; icon assignment verified via GetIcons readback; PLAN E COMPLETE)
+E1-E3 combined review: all SPEC pass, quality good, no blockers. Queued micro-hardening (apply after android build): reset IsPaused in NotifyCrash/OnBlown + gate pause panel on IsPaused && Descending. Reviewer note: E1 diff was missing from the package base (pulled via git show) - mind package ranges.
