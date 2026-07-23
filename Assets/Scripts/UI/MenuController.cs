@@ -11,6 +11,8 @@ namespace Downshift
         public TMP_Text[] tierTexts = new TMP_Text[4];
         public TMP_Text[] costTexts = new TMP_Text[4];
         public UnityEngine.UI.Button[] buyButtons = new UnityEngine.UI.Button[4];
+        public TMP_Text sfxToggleText;
+        public TMP_Text musicToggleText;
 
         void Start()
         {
@@ -29,6 +31,20 @@ namespace Downshift
             SceneManager.LoadScene("Run");
         }
 
+        public void ToggleSfx()
+        {
+            GameSession.Save.sfxMuted = !GameSession.Save.sfxMuted;
+            GameSession.Persist();
+            Refresh();
+        }
+
+        public void ToggleMusic()
+        {
+            GameSession.Save.musicMuted = !GameSession.Save.musicMuted;
+            GameSession.Persist();
+            Refresh();
+        }
+
         void Refresh()
         {
             var save = GameSession.Save;
@@ -44,6 +60,9 @@ namespace Downshift
                 costTexts[i].text = cost < 0 ? "MAX" : $"{cost} c";
                 buyButtons[i].interactable = Upgrades.CanBuy(save, (UpgradeTrack)i, econ);
             }
+
+            if (sfxToggleText != null) sfxToggleText.text = save.sfxMuted ? "SFX OFF" : "SFX ON";
+            if (musicToggleText != null) musicToggleText.text = save.musicMuted ? "MUSIC OFF" : "MUSIC ON";
         }
     }
 }

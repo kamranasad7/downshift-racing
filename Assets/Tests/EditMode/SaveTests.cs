@@ -40,4 +40,23 @@ public class SaveTests
         var m = SaveStore.Load(TempPath());
         Assert.AreEqual(0, m.coins);
     }
+
+    [Test]
+    public void RoundTripPersistsMuteFlags()
+    {
+        var m = new SaveModel { sfxMuted = true, musicMuted = true };
+        SaveStore.Save(m, TempPath());
+        var loaded = SaveStore.Load(TempPath());
+        Assert.IsTrue(loaded.sfxMuted);
+        Assert.IsTrue(loaded.musicMuted);
+    }
+
+    [Test]
+    public void LegacySaveWithoutMuteFieldsLoadsUnmuted()
+    {
+        File.WriteAllText(TempPath(), "{\"coins\":10,\"bestDistanceM\":1.0,\"upgradeTiers\":[0,0,0,0],\"schemaVersion\":1}");
+        var m = SaveStore.Load(TempPath());
+        Assert.IsFalse(m.sfxMuted);
+        Assert.IsFalse(m.musicMuted);
+    }
 }

@@ -77,14 +77,17 @@ namespace Downshift
 
         void Update()
         {
+            bool sfxMuted = GameSession.Save.sfxMuted;
+            _musicSource.volume = GameSession.Save.musicMuted ? 0f : musicVolume;
+
             if (vehicle == null || vehicle.stats == null) return;
 
             float rpmT = Mathf.InverseLerp(vehicle.stats.idleRpm, vehicle.stats.redlineRpm, vehicle.EngineRpm);
             _engineSource.pitch = Mathf.Lerp(enginePitchMin, enginePitchMax, rpmT);
             float speedT = Mathf.Clamp01(vehicle.SpeedMs / 20f);
-            _engineSource.volume = vehicle.IsShutdown ? 0f : engineVolume * (0.4f + 0.6f * speedT);
+            _engineSource.volume = (sfxMuted || vehicle.IsShutdown) ? 0f : engineVolume * (0.4f + 0.6f * speedT);
 
-            bool squealing = VehicleInput.BrakeHeld && !vehicle.IsShutdown && vehicle.SpeedMs > 0.5f;
+            bool squealing = !sfxMuted && VehicleInput.BrakeHeld && !vehicle.IsShutdown && vehicle.SpeedMs > 0.5f;
             _squealSource.volume = squealing
                 ? squealVolume * Mathf.Clamp01(vehicle.Brakes.Temp / vehicle.stats.brakeMaxTemp)
                 : 0f;
@@ -117,6 +120,7 @@ namespace Downshift
         static void PlayOneShot(AudioClip clip)
         {
             if (_instance == null || _instance._oneShotSource == null) return;
+            if (GameSession.Save.sfxMuted) return;
             _instance._oneShotSource.PlayOneShot(clip, _instance.oneShotVolume);
         }
     }

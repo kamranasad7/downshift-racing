@@ -52,6 +52,14 @@ namespace Downshift.EditorTools
             var play = Button(canvasGo, "PlayBtn", new Vector2(0, -420), new Vector2(400, 140), "PLAY");
             UnityEditor.Events.UnityEventTools.AddPersistentListener(play.onClick, menu.Play);
 
+            var sfxBtn = Button(canvasGo, "SfxToggleBtn", new Vector2(-820, -480), new Vector2(280, 80), "SFX ON");
+            menu.sfxToggleText = sfxBtn.GetComponentInChildren<TMP_Text>();
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(sfxBtn.onClick, menu.ToggleSfx);
+
+            var musicBtn = Button(canvasGo, "MusicToggleBtn", new Vector2(-820, -380), new Vector2(280, 80), "MUSIC ON");
+            menu.musicToggleText = musicBtn.GetComponentInChildren<TMP_Text>();
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(musicBtn.onClick, menu.ToggleMusic);
+
             if (!AssetDatabase.IsValidFolder("Assets/Scenes"))
                 AssetDatabase.CreateFolder("Assets", "Scenes");
             EditorSceneManager.SaveScene(scene, "Assets/Scenes/Menu.unity");
