@@ -58,3 +58,4 @@ Task D1: complete (6d52e5d, spec pass, quality approved; TDD caught station-scan
 Task D2: complete (6d3ddb2, spec pass, all screenshots verified; rocks retuned to real chassis clearance; 56/16 green)
   D2 exposed timescale leak across playmode tests (pause fix side effect) -> fixed in PlayModeCleanup TearDown (validated by E1 suite run)
   Pause fix + audio verification: covered by D2's full 16/16 playmode run (both features' tests green)
+Task E1: complete (1d79bb1, 58/58 + 16/16; timescale-leak fix confirmed live by full-suite completion). E1-E3 get one combined review after E3.
