@@ -22,6 +22,7 @@ public abstract class PlayModeCleanup
     [TearDown]
     public void SweepScene()
     {
+        Time.timeScale = 1f;
         VehicleInput.KeyboardBrake = false;
         VehicleInput.UiBrake = false;
         foreach (var go in Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None))
